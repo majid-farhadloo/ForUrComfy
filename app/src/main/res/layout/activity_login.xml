@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.example.majid.forurcomfy.LoginActivity">
+    <EditText
+        android:id="@+id/EmailLogIn"
+        android:layout_width="374dp"
+        android:layout_height="74dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp" />
+    <EditText
+        android:id="@+id/PasswordLogIn"
+        android:layout_width="374dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="96dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp" />
+
+    <Button
+        android:id="@+id/LogIn"
+        android:layout_width="374dp"
+        android:layout_height="74dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/PasswordLogIn"
+        android:fontFamily="cursive"
+        android:text="Log In"
+        android:textSize="20dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/ForgotPass"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/ForgotPass"
+        android:layout_width="374dp"
+        android:layout_height="74dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/LogIn"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="cursive"
+        android:text="Forgot Password"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/PasswordLogIn"
+        app:layout_constraintVertical_bias="0.346"
+        tools:layout_editor_absoluteX="0dp" />
+</RelativeLayout>
