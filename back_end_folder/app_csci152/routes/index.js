@@ -11,6 +11,9 @@ router.post('/regist', fuinction(req, res, next){
 	var user = new User();
 	user.email = req.body.email;
 	user.passwd = req.body.passwd;
+	user.cell = req.body.cell;
+	user.fname = req.body.fname;
+	user.lname = req.body.lname;
 
 	user.save(function (err) {
 		if(err) {
