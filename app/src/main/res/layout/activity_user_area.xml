@@ -14,9 +14,25 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:padding="5dp"
-        android:text="underConstruction"
+        android:text="Welcome"
         android:textAlignment="center"
         android:textSize="30dp"
         tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="191dp" />
+        tools:layout_editor_absoluteY="61dp" />
+
+    <Button
+        android:id="@+id/bOrder"
+        android:layout_width="160dp"
+        android:layout_height="57dp"
+        android:text="Order"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="174dp" />
+
+    <Button
+        android:id="@+id/bDeliveree"
+        android:layout_width="160dp"
+        android:layout_height="57dp"
+        android:text="Deliveree"
+        tools:layout_editor_absoluteX="204dp"
+        tools:layout_editor_absoluteY="174dp" />
 </android.support.constraint.ConstraintLayout>
