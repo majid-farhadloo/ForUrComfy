@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +20,16 @@ public class LoginActivity extends AppCompatActivity {
         final EditText password = (EditText) findViewById(R.id.PasswordLogIn);
         final Button Login = (Button) findViewById(R.id.LogIn);
         final Button forgotPassword = (Button) findViewById(R.id.ForgotPass);
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent LoginIntent = new Intent(LoginActivity.
+                        this,UserAreaActivity.class);
+                LoginActivity.this.startActivity(LoginIntent);
+            }
+
+        });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override

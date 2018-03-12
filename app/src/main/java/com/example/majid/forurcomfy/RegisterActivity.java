@@ -1,7 +1,9 @@
 package com.example.majid.forurcomfy;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,6 +23,16 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText pass = (EditText) findViewById(R.id.Password);
         final EditText reTypePass = (EditText) findViewById(R.id.MatchPassword);
         final Button register = (Button) findViewById(R.id.RegisterBtn);
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(RegisterActivity.this,
+                        UserAreaActivity.class);
+                RegisterActivity.this.startActivity(registerIntent);
+
+            }
+        });
 
 //        Pattern EmailAddress = Pattern.compile("@mail.fresnostate.edu");
 //        Matcher EmailAddress2 = EmailAddress.matcher("@mail.fresnostate.edu");

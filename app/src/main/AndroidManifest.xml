@@ -16,13 +16,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".UserAreaActivity" />
-        <activity android:name=".ForgotPassActivity"
-            android:parentActivityName=".LoginActivity"></activity>
+        <activity
+            android:name=".ForgotPassActivity"
+            android:parentActivityName=".LoginActivity" />
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".UserAreaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserAreaActivity" />
+        </activity>
+        <activity android:name=".VeggiMenuActivity" />
+        <activity android:name=".OrderActivity"></activity>
     </application>
 
 </manifest>
