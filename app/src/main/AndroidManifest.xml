@@ -26,6 +26,7 @@
         <activity
             android:name=".ForgotPassActivity"
             android:parentActivityName=".LoginActivity" />
+<<<<<<< HEAD
         <activity
             android:name=".DetailActivity"
             android:parentActivityName=".UserAreaActivity">
@@ -35,6 +36,10 @@
         </activity>
         <activity android:name=".VeggiMenuActivity" />
         <activity android:name=".OrderActivity"></activity>
+=======
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".VeggiMenuActivty"></activity>
+>>>>>>> e9d77cd4715d01eb643f048945c34146b34c27a0
     </application>
 
 </manifest>

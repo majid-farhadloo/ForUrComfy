@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ForUrComfy</string>
+<<<<<<< HEAD
     <string name="title_activity_order">OrderActivity</string>
+=======
+    <string name="title_activity_restaruant_menu">restaruantMenu</string>
+>>>>>>> e9d77cd4715d01eb643f048945c34146b34c27a0
 </resources>

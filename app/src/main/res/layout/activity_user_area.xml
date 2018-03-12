@@ -11,6 +11,7 @@
     android:paddingTop="16dp"
     tools:context="com.example.majid.forurcomfy.UserAreaActivity">
 
+<<<<<<< HEAD
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
@@ -18,3 +19,35 @@
         app:layoutManager="LinearLayoutManager"
         />
 </RelativeLayout>
+=======
+
+    <EditText
+        android:id="@+id/hello"
+        android:layout_width="374dp"
+        android:layout_height="74dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        android:text="Welcome"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <Button
+        android:id="@+id/bOrder"
+        android:layout_width="160dp"
+        android:layout_height="57dp"
+        android:text="Order"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="174dp" />
+
+    <Button
+        android:id="@+id/bDeliveree"
+        android:layout_width="160dp"
+        android:layout_height="57dp"
+        android:text="Deliveree"
+        tools:layout_editor_absoluteX="204dp"
+        tools:layout_editor_absoluteY="174dp" />
+</android.support.constraint.ConstraintLayout>
+>>>>>>> e9d77cd4715d01eb643f048945c34146b34c27a0

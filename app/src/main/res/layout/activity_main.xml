@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:background='@drawable/bg1'
+=======
+    android:background='@drawable/att0'
+>>>>>>> e9d77cd4715d01eb643f048945c34146b34c27a0
     android:minHeight="112dp"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
