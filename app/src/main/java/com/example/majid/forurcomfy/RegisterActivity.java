@@ -1,17 +1,26 @@
 package com.example.majid.forurcomfy;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.majid.forurcomfy.Remote.ApiUtlis;
+import com.example.majid.forurcomfy.Remote.RegisterService;
+import com.example.majid.forurcomfy.model.ResObj;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    RegisterService registerService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        registerService = ApiUtlis.getRegisterService();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         final EditText fName = (EditText) findViewById(R.id.FirstName);
@@ -22,8 +31,88 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText reTypePass = (EditText) findViewById(R.id.MatchPassword);
         final Button register = (Button) findViewById(R.id.RegisterBtn);
 
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String firstName = fName.getText().toString();
+                String lastName = lName.getText().toString();
+                String cellPhone = phoneNumber.getText().toString();
+                String emailAddress = Email.getText().toString();
+                String password = pass.getText().toString();
+                String reTypePassword = reTypePass.getText().toString();
+
+                //validate Register
+                if(validateRegister(firstName,lastName,cellPhone,emailAddress,
+                        password,reTypePassword));
+                doRegister(firstName,lastName,cellPhone,emailAddress
+                        ,password,reTypePassword);
+            }
+        });
+
 //        Pattern EmailAddress = Pattern.compile("@mail.fresnostate.edu");
 //        Matcher EmailAddress2 = EmailAddress.matcher("@mail.fresnostate.edu");
 //        boolean match = EmailAddress2.matches();
     }
+    public boolean validateRegister(String fname, String lname, String cellphone,
+                                    String eamil, String pass, String reTypePass){
+        if (fname == null || fname.trim().length()==0) {
+            Toast.makeText(this, "Your First Name  is required"
+                    , Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (lname == null || lname.trim().length()==0) {
+            Toast.makeText(this, "Your Last Name  is required"
+                    , Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (cellphone == null || cellphone.trim().length()==0) {
+            Toast.makeText(this, "Your Phone number  is required"
+                    , Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (pass == null || pass.trim().length()==0) {
+            Toast.makeText(this, "Your Password is required"
+                    , Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (reTypePass != pass) {
+            Toast.makeText(this, "Your Password does not match"
+                    , Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+    private void doRegister(final String fname, final String lname, final String cellphone,
+                            final String email, final String pass, final String reTypePass) {
+        Call<ResObj> call = registerService.register(fname, lname, cellphone, email,
+                pass, reTypePass);
+        call.enqueue(new Callback<ResObj>() {
+            @Override
+            public void onResponse(Call<ResObj> call, Response<ResObj> response) {
+                if (response.isSuccessful()) {
+                    ResObj resObj = response.body();
+                    if (resObj.getMessage().equals("true")) {
+                        Intent registerIntent = new Intent(RegisterActivity.this,
+                                UserAreaActivity.class);
+                        RegisterActivity.this.startActivity(registerIntent);
+
+                    } else {
+                        Toast.makeText(RegisterActivity.this,
+                                "Your information are not validated",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(RegisterActivity.this,
+                            "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, t.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
