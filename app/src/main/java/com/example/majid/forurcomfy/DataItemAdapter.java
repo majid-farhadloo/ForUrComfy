@@ -63,7 +63,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             public void onClick(View view) {
 //                Toast.makeText(mContext, "You selected " +
 //                        item.getItemName(), Toast.LENGTH_SHORT).show();
-               // String itemId = item.getItemId();
+                // String itemId = item.getItemId();
                 Intent intent = new Intent(mContext,DetailActivity.class);
                 //intent.putExtra(ITEM_ID_KEY,itemId);
                 intent.putExtra(ITEM_KEY,item);

@@ -61,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Received item " + item.getItemId(),
                     Toast.LENGTH_SHORT);
         }
-            else{
+        else{
             Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
         }
 

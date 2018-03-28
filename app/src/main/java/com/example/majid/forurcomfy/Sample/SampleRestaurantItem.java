@@ -24,7 +24,7 @@ public class SampleRestaurantItem {
         addItem(new RestaurantItem(null, "Taco Bell", "taco_bell.jpg"));
         addItem(new RestaurantItem(null, "The Bucket", "the_bucket.jpg"));
         addItem(new RestaurantItem(null, "MyRestaurant", "my_restaurant.jpg"));
-}
+    }
     private static void addItem(RestaurantItem item) {
         dataItemList.add(item);
         dataItemMap.put(item.getItemId(), item);

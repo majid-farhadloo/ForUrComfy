@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 public interface RegisterService {
     @GET("Register/{firstName}/{LastName}/{cellPhone}/{email}/{password}/{reTypePassword}")
     Call<ResObj> register(@Path("firstName") String firstName, @Path("LastName") String LastName
-    , @Path("cellPhone") String cellPhone, @Path("email") String email,
+            , @Path("cellPhone") String cellPhone, @Path("email") String email,
                           @Path("password")String password, @Path("reTypePassword")
                                   String reTypePassword);
 }

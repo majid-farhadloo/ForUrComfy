@@ -5,7 +5,7 @@ package com.example.majid.forurcomfy.model;
  */
 
 public class ResObj {
-   private String message;
+    private String message;
 
     public String getMessage() {
         return message;
