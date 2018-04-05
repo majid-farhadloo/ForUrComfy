@@ -1,63 +1,136 @@
 package com.example.majid.forurcomfy;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.example.majid.forurcomfy.Remote.APIService;
 import com.example.majid.forurcomfy.Remote.ApiUtlis;
-import com.example.majid.forurcomfy.Remote.UserService;
-import com.example.majid.forurcomfy.model.ResObj;
+import com.example.majid.forurcomfy.model.Post;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    UserService userService;
+    private APIService mAPIService;
+    private TextView mResponseTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        userService = ApiUtlis.getUserService();
+        mAPIService = ApiUtlis.getAPIService();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        final EditText email = (EditText) findViewById(R.id.EmailLogIn);
-        final EditText password = (EditText) findViewById(R.id.PasswordLogIn);
+        final EditText edtemail = (EditText) findViewById(R.id.EmailLogIn);
+        final EditText phoneNumber = (EditText) findViewById(R.id.PhoneNumber);
+        final EditText edtpassword = (EditText) findViewById(R.id.PasswordLogIn);
         final Button Login = (Button) findViewById(R.id.LogIn);
         final Button forgotPassword = (Button) findViewById(R.id.ForgotPass);
+
+        //Init Firebase
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //final DatabaseReference table_user = database.getReference("User");
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mail = email.getText().toString();
-                String pass = password.getText().toString();
-                // validate form
-                if (validateLogin(mail, pass)) {
-                    //do login()
-                    doLogin(mail, pass);
+                final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
+                mDialog.setMessage("Please waiting ...");
+                mDialog.show();
 
+                String email = edtemail.getText().toString().trim();
+                String password = edtpassword.getText().toString().trim();
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+                    sendPost(email, password);
+                    mDialog.dismiss();
                 }
+                // table_user.addValueEventListener(new ValueEventListener() {
+                //  @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        // check if user doesn't exist in database
+//                        if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+//                            mDialog.dismiss();
+//                            Post user = dataSnapshot.child(phoneNumber.getText().toString())
+//                                    .getValue(Post.class);
+//                            String pass = user.getPassword();
+//                            if (pass.equals(password.getText().toString())) {
+//                                Toast.makeText(LoginActivity.this, "Login successfully",
+//                                        Toast.LENGTH_SHORT).show();
+////                                Intent LoginIntent = new Intent(LoginActivity.
+////                                        this, UserAreaActivity.class);
+////                             //   LoginIntent.putExtra("Phone", (Parcelable) user);
+////                                LoginActivity.this.startActivity(LoginIntent);
+//                            } else {
+//                                Toast.makeText(LoginActivity.this,
+//                                        "Login Failed !!!", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } else {
+//                            mDialog.dismiss();
+//                            Toast.makeText(LoginActivity.this, "User does not exist",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//            }
+                // });
+                forgotPassword.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View v) {
+                        Intent forgotPassIntent = new Intent(LoginActivity.
+                                this, ForgotPassActivity.class);
+                        LoginActivity.this.startActivity(forgotPassIntent);
+                    }
+                });
+
 
             }
 
-        });
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent forgotPassIntent = new Intent(LoginActivity.
-                        this, ForgotPassActivity.class);
-                LoginActivity.this.startActivity(forgotPassIntent);
+            public void sendPost(final String email, String password) {
+                mAPIService.savePost(email, password).enqueue(new Callback<Post>() {
+                    public static final String TAG = "tag";
+
+                    @Override
+                    public void onResponse(Call<Post> call, Response<Post> response) {
+
+                        if (response.isSuccessful()) {
+//                            showResponse(response.body().toString());
+//                            Log.i(TAG, "post submitted to API." + response.body().toString());
+                            Intent LoginIntent = new Intent(LoginActivity.
+                                        this, UserAreaActivity.class);
+                                LoginIntent.putExtra("email", email);
+                                LoginActivity.this.startActivity(LoginIntent);
+                        }
+                    }
+
+                    public void showResponse(String response) {
+                        if (mResponseTv.getVisibility() == View.GONE) {
+                            mResponseTv.setVisibility(View.VISIBLE);
+                        }
+                        mResponseTv.setText(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Post> call, Throwable t) {
+                        Log.e(TAG, "Unable to submit post to API.");
+                    }
+                });
             }
-        });
-
-
-    }
-
-    private boolean validateLogin(String username, String password) {
+    /*private boolean validateLogin(String username, String password) {
         if (username == null || username.trim().length() == 0) {
             Toast.makeText(this, "Your Email address is required"
                     , Toast.LENGTH_SHORT).show();
@@ -69,9 +142,9 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         return true;
-    }
+    }*/
 
-    private void doLogin(final String username, final String password) {
+    /*private void doLogin(final String username, final String password) {
         Call<ResObj> call = userService.login(username, password);
         call.enqueue(new Callback<ResObj>() {
             @Override
@@ -100,6 +173,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, t.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
+        });
+    }*/
         });
     }
 }

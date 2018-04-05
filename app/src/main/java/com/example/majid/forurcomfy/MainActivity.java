@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent loginIntent = new Intent(MainActivity.
                         this,LoginActivity.class);
-                MainActivity.this.startActivity(loginIntent);
+                        startActivity(loginIntent);
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
