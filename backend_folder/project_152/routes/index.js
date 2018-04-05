@@ -82,6 +82,7 @@ router.post('/login',function(req,res,next)
         //if user exists
         console.log(user);
         if(user) {
+						req.session.user = user;
             return res.json({
                 "result": true,
                 "message": "Login success",
@@ -99,6 +100,25 @@ router.post('/login',function(req,res,next)
         });
     }
   })
+});
+
+router.get('/session',function(req,res){
+	if(!req.session.user){
+		return res.json({
+			"result": false,
+			"message": "User not logged in",
+		});}
+		else{
+		return res.json({
+			"result":true,
+			"message": "Session Created",
+			"data": {
+					"firstname": req.session.user['firstname'],
+					"lastname": req.session.user['lastname'],
+					"cell": req.session.user['cell']
+			}
+		});
+	}
 });
 
 module.exports = router;
