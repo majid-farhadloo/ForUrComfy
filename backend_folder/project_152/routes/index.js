@@ -25,44 +25,44 @@ router.get('/', function(req, res, next) {
 //POST REQUEST FOR SAVING USER TO DB
 router.post('/register',function(req,res)
 {
-  if(!req.body.email) return res.json({"result":false, "message":"Email required"});
-  if(!req.body.password) return res.json({"result":false, "message":"Password required"});
-  if(!req.body.firstname) return res.json({"result":false, "message":"Firstname required"});
-  if(!req.body.lastname) return res.json({"result":false, "message":"Lastname required"});
-  if(!req.body.cell) return res.json({"result":false, "message":"Phone required"});
+    if(!req.body.email) return res.json({"result":false, "message":"Email required"});
+    if(!req.body.password) return res.json({"result":false, "message":"Password required"});
+    if(!req.body.firstname) return res.json({"result":false, "message":"Firstname required"});
+    if(!req.body.lastname) return res.json({"result":false, "message":"Lastname required"});
+    if(!req.body.cell) return res.json({"result":false, "message":"Phone required"});
 
-  var email = req.body.email;
-  var password = md5(req.body.password);
-  var firstname = req.body.firstname;
-  var lastname = req.body.lastname;
-  var cell = req.body.cell;
+    var email = req.body.email;
+    var password = md5(req.body.password);
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    var cell = req.body.cell;
 
-  var newUser = new User();
-  newUser.email = email;
-  newUser.password = password;
-  newUser.firstname = firstname;
-  newUser.lastname = lastname;
-  newUser.cell = cell;
+    var newUser = new User();
+    newUser.email = email;
+    newUser.password = password;
+    newUser.firstname = firstname;
+    newUser.lastname = lastname;
+    newUser.cell = cell;
 
-  User.findOne({email:email},function(err,user){
-      if(err) {
-          console.log(err);
-          res.json(err);
-      } else {
-          if(user==null) {
+    User.findOne({email:email},function(err,user){
+        if(err) {
+            console.log(err);
+            res.json(err);
+        } else {
+            if(user==null) {
                 newUser.save(function(err,savedUser){
-                if(err){
-                   console.log(err);
-                   return res.json({"result":false, "message":"Failed creating an account"});
-                }
-                return res.json({"result":true, "message":"Account Registered!"});
-              });
-          }else{
-              console.log(user);
-              res.json({"result":false, "message":"Email already exists"});
-          }
-      }
-  });
+                    if(err){
+                        console.log(err);
+                        return res.json({"result":false, "message":"Failed creating an account"});
+                    }
+                    return res.json({"result":true, "message":"Account Registered!"});
+                });
+            }else{
+                console.log(user);
+                res.json({"result":false, "message":"Email already exists"});
+            }
+        }
+    });
 
 });
 
