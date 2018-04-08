@@ -102,11 +102,11 @@ router.post('/login',function(req,res,next)
   })
 });
 
-router.get('/session',function(req,res){
+router.get('/menu',function(req,res){
 	if(!req.session.user){
 		return res.json({
 			"result": false,
-			"message": "User not logged in",
+			"message": "User not logged in"
 		});}
 		else{
 		return res.json({
@@ -120,5 +120,16 @@ router.get('/session',function(req,res){
 		});
 	}
 });
+
+router.get('/logout',function(req,res)
+{
+	req.session.destroy();
+	return res.json({
+		"result":true,
+		"message":"User logged out"
+	});
+})
+
+
 
 module.exports = router;
