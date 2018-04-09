@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                 mDialog.dismiss();
 //                doRegister(firstName,lastName,cellPhone,emailAddress
 //                        ,password,reTypePassword);
-                sendPost(firstName,lastName,cellPhone,emailAddress, password,reTypePassword);
+                sendPost(firstName,lastName,cellPhone,emailAddress, password);
 
 
             }
@@ -129,9 +129,9 @@ public class RegisterActivity extends AppCompatActivity {
 //        });
 //    }
     public void sendPost(String fname, String lname, String cellphone, final String email,
-                         String password, String retypePass) {
+                         String password) {
         registerService.savePostRegister(fname,lname,cellphone,email,
-                password,retypePass).enqueue(new Callback<Post>() {
+                password).enqueue(new Callback<Post>() {
             public static final String TAG = "tag";
 
             @Override

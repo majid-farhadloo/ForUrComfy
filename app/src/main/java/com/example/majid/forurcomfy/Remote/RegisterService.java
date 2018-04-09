@@ -13,12 +13,11 @@ public interface RegisterService {
 
     @POST("/register")
     @FormUrlEncoded
-    Call<Post> savePostRegister(@Field("fname") String firstName,
-                        @Field("lname") String lastName,
-                        @Field("mobilePhone") String mobileNumber,
+    Call<Post> savePostRegister(@Field("firstname") String firstName,
+                        @Field("lastname") String lastName,
+                        @Field("cell") String mobileNumber,
                         @Field("email") String email,
-                        @Field("password") String pass,
-                        @Field("reTypePassword") String retypePass);
+                        @Field("password") String pass);
 }
 
 

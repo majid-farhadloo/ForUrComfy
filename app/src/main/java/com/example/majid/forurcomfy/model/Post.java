@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Post {
-    @SerializedName("fname")
+    @SerializedName("firstname")
     @Expose
-    private String fname;
-    @SerializedName("lname")
+    private String firstname;
+    @SerializedName("lastname")
     @Expose
-    private String lname;
-    @SerializedName("mobilePhone")
+    private String lastname;
+    @SerializedName("cell")
     @Expose
-    private String mobilePhone;
+    private String cell;
     @SerializedName("email")
     @Expose
     private String email;
@@ -34,28 +34,28 @@ public class Post {
     @Override
     public String toString() {
         return "User{" +
-                "fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", reTypePassword='" + reTypePassword + '\'' +
                 '}';
     }
 
-    public String getFname() {
-        return fname;
+    public String getfirstname() {
+        return firstname;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setfirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLname() {
-        return lname;
+    public String getlastname() {
+        return lastname;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setlastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -82,11 +82,11 @@ public class Post {
         this.reTypePassword = reTypePassword;
     }
 
-    public Post(String fnmae, String lnmae, String email, String password, String reTypepassword) {
-        this.fname = fnmae;
-        this.lname = lnmae;
+    public Post(String fname, String lname, String email, String password) {
+        this.firstname = fname;
+        this.lastname = lname;
         this.email = email;
         this.password = password;
-        this.reTypePassword = reTypepassword;
+       // this.reTypePassword = reTypepassword;
     }
 }
