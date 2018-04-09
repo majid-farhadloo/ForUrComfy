@@ -10,10 +10,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.majid.forurcomfy.Remote.APIService;
 import com.example.majid.forurcomfy.Remote.ApiUtlis;
 import com.example.majid.forurcomfy.model.Post;
+import com.example.majid.forurcomfy.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,28 +38,68 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         final EditText edtemail = (EditText) findViewById(R.id.EmailLogIn);
-        final EditText phoneNumber = (EditText) findViewById(R.id.PhoneNumber);
+        final EditText phoneNumber = (EditText) findViewById(R.id.PhoneNumber); // added materialedit text was orginally just edit text
         final EditText edtpassword = (EditText) findViewById(R.id.PasswordLogIn);
         final Button Login = (Button) findViewById(R.id.LogIn);
         final Button forgotPassword = (Button) findViewById(R.id.ForgotPass);
 
-        //Init Firebase
-        //FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //final DatabaseReference table_user = database.getReference("User");
+        //Init Firebase ********
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_user = database.getReference("User");
+
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
-                mDialog.setMessage("Please waiting ...");
-                mDialog.show();
+            public void onClick(View view) {
 
-                String email = edtemail.getText().toString().trim();
-                String password = edtpassword.getText().toString().trim();
-                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    sendPost(email, password);
-                    mDialog.dismiss();
-                }
+                final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
+                mDialog.setMessage("Please wait...");
+                mDialog.show();
+                table_user.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //User exist
+                        if(dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+
+                            mDialog.dismiss();
+
+                            User user = dataSnapshot.child(phoneNumber.getText().toString()).getValue(User.class);
+                            if (user.getPassword().equals(edtpassword.getText().toString())) {
+                                Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Sign in failed!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+
+
+
+
+ // Change back lines below if above dont work *
+
+        //Login.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View v) {
+                //final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
+                //mDialog.setMessage("Please waiting ...");
+               // mDialog.show();
+
+                //String email = edtemail.getText().toString().trim();
+                //String password = edtpassword.getText().toString().trim();
+                //if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+                    //sendPost(email, password);
+                   // mDialog.dismiss();
+               // }
                 // table_user.addValueEventListener(new ValueEventListener() {
                 //  @Override
 //                    public void onDataChange(DataSnapshot dataSnapshot) {
