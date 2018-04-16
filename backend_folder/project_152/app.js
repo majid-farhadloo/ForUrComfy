@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
-var delivery = require('./routes/delivery');
+var ordering = require('./routes/ordering');
 var app = express();
 
 // view engine setup
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:"anything",resave:false,saveUninitialized:true}));
 app.use('/', index);
-app.use('/delivery', delivery);
+app.use('/order', ordering);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

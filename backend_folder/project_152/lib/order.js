@@ -5,6 +5,7 @@ var orderSchema = new mongoose.Schema({
   price : Number,
   quantity: Number,
   currentUser: String,
+  time : String
 });
 
 var order = mongoose.model ('order',orderSchema);
