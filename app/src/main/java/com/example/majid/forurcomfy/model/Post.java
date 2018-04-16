@@ -27,8 +27,8 @@ public class Post {
     @Expose
     private String reTypePassword;
 
-    public Post() {
-
+    public Post(String email) {
+        this.email = email;
     }
 
     @Override

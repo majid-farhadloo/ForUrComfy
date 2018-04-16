@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.majid.forurcomfy.Common.Current;
 import com.example.majid.forurcomfy.Remote.ApiUtlis;
 import com.example.majid.forurcomfy.Remote.RegisterService;
 import com.example.majid.forurcomfy.model.Post;
@@ -50,9 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
                 mDialog.setMessage("Please waiting ...");
                 mDialog.show();
                 //validate Register
+                mDialog.dismiss();
                 if (validateRegister(firstName, lastName, cellPhone, emailAddress,
                         password, reTypePassword)) ;
-                mDialog.dismiss();
+
 //                doRegister(firstName,lastName,cellPhone,emailAddress
 //                        ,password,reTypePassword);
                 sendPost(firstName,lastName,cellPhone,emailAddress, password);
@@ -128,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-    public void sendPost(String fname, String lname, String cellphone, final String email,
+    public void sendPost(final String fname, final String lname, String cellphone, final String email,
                          String password) {
         registerService.savePostRegister(fname,lname,cellphone,email,
                 password).enqueue(new Callback<Post>() {
@@ -140,10 +142,12 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 //                            showResponse(response.body().toString());
 //                            Log.i(TAG, "post submitted to API." + response.body().toString());
-                    Intent registerIntent = new Intent(RegisterActivity.
-                            this, UserAreaActivity.class);
+                    Intent homeIntent = new Intent(RegisterActivity.
+                            this, Home.class);
+                    Current.currentUser = new Post(email);
                    // registerIntent.putExtra("email", email);
-                    RegisterActivity.this.startActivity(registerIntent);
+                    RegisterActivity.this.startActivity(homeIntent);
+                    finish();
                 }
             }
 
