@@ -25,8 +25,8 @@ router.post('/', function(req, res) {
     var foodName = req.body.foodName;
     var price = req.body.price;
     var quantity = req.body.quantity;
-    newOrder.email = email;
-    newOrder.firstname = firstname;
+    newOrder.foodName = foodName;
+    newOrder.price = price;
     newOrder.quantity = quantity;
     newOrder.currentUser = req.session.user['firstname'];
     newOrder.time = moment();
