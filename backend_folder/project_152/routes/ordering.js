@@ -30,12 +30,19 @@ router.post('/', function(req, res) {
     newOrder.quantity = quantity;
     newOrder.currentUser = req.session.user['firstname'];
     newOrder.time = moment();
+    newOrder.completed = false;
     newOrder.save(function(err,savedOrder){
         if(err){
             console.log(err);
             return res.json({"result":false, "message":"Failed to save order"});
         }
-        return res.json({"result":true, "message":"Order is being processed!"});
+        return res.json({"result":true,
+                          "message":"Order is being processed!",
+                          "Order ID":savedOrder['_id'],
+                          "Price":savedOrder['price'],
+                          "Quantity":savedOrder['quantity'],
+                          "Total Price": savedOrder['price']*savedOrder['quantity']
+                        });
     });
 
 });
