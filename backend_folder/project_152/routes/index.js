@@ -3,6 +3,15 @@ var router = express.Router();
 var User = require('../lib/User');
 var md5= require('md5');
 var mongoose = require('mongoose');
+var ExpressBrute = require ('express-brute');
+
+var store = new ExpressBrute.MemoryStore();
+var bruteforce = new ExpressBrute(store,{
+	freeRetries: 2,
+	minWait: 1000 * 60, //1 minute
+	maxWait: 10*60*1000, //10 minutes
+	failCallback: ExpressBrute.FailTooManyRequests
+});
 
 
 //CONNECT TO DATABASE
@@ -67,7 +76,7 @@ router.post('/register',function(req,res)
 });
 
 //POST REQUEST FOR FINDING USER
-router.post('/login',function(req,res,next)
+router.post('/login',bruteforce.prevent,function(req,res,next)
 {
   if(!req.body.email) return res.json({"result":false, "message":"Email required"});
   if(!req.body.password) return res.json({"result":false, "message":"Password required"});
