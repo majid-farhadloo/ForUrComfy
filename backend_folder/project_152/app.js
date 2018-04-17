@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var ordering = require('./routes/ordering');
 var delivery = require('./routes/delivery');
+var food_menu = require('./routes/food_menu');
 var app = express();
 
 // view engine setup
@@ -26,6 +27,7 @@ app.use(session({secret:"anything",resave:false,saveUninitialized:true}));
 app.use('/delivery',delivery);
 app.use('/', index);
 app.use('/order', ordering);
+app.use('/food_menu', food_menu);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
