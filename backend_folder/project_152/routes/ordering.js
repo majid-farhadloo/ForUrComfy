@@ -29,7 +29,7 @@ router.post('/', function(req, res) {
     newOrder.price = price;
     newOrder.quantity = quantity;
     newOrder.currentUser = req.session.user['firstname'];
-    newOrder.time = moment();
+    newOrder.time = moment().local();
     newOrder.completed = false;
     newOrder.save(function(err,savedOrder){
         if(err){
