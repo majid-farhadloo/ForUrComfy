@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
     //     "time": "Mon Apr 16 2018 15:33:24 GMT-0700",
     //     "__v": 0
     // },
-    res.send(result);
+    res.json(result);
     db.close();
     // res.send('respond with a resource');
     // var user  = req.session.user;
