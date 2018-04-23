@@ -7,7 +7,7 @@
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_gravity="center"
         android:layout_margin="5dip" android:id="@+id/TextViewItem"
-        android:textSize="26dip" android:text="Book Title" android:textColor="#000000"
+        android:textSize="26dip" android:text="Food Title" android:textColor="#000000"
         android:minLines="2" android:maxWidth="150dip"></TextView>
     <TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_weight="1"></TextView>
