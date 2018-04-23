@@ -32,6 +32,10 @@ router.post('/', function(req, res) {
     newOrder.time = moment().local();
     newOrder.completed = false;
     newOrder.save(function(err,savedOrder){
+        if(!req.session.user)
+        {
+          return res.json({"result":false, "message":"User not logged in"});
+        }
         if(err){
             console.log(err);
             return res.json({"result":false, "message":"Failed to save order"});
