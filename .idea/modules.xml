@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ForUrComfy.iml" filepath="$PROJECT_DIR$/ForUrComfy.iml" />
-      <module fileurl="file://C:\Majid\CSCI152\mainProject\ForUrComfy\ForUrComfy-master.iml" filepath="C:\Majid\CSCI152\mainProject\ForUrComfy\ForUrComfy-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

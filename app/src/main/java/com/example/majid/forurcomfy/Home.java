@@ -1,5 +1,6 @@
 package com.example.majid.forurcomfy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -96,15 +97,28 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.deliverer) {
             // Handle the camera action
+            Intent intent = new Intent(Home.this, Home.class); // this second home should be deliverer
+            startActivity(intent);
         } else if (id == R.id.user) {
+            Intent intent = new Intent(Home.this, LoginActivity.class); // this second home should be deliverer
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_menu) {
+            Intent intent = new Intent(Home.this, VeggiMenuActivity.class); // this second home should be deliverer
+            startActivity(intent);
 
         } else if (id == R.id.nav_cart) {
+            Intent intent = new Intent(Home.this, ShoppingCartActivity.class); // this second home should be cartactivity
+            startActivity(intent);
 
         } else if (id == R.id.nav_orders) {
+            Intent intent = new Intent(Home.this, OrderActivity.class); // this second home should be deliverer
+            startActivity(intent);
 
         } else if (id == R.id.nav_logout) {
+            Intent intent = new Intent(Home.this, LoginActivity.class); // this second home should be deliverer
+            startActivity(intent);
 
         }
 
