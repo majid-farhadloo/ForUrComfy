@@ -1,16 +1,27 @@
 package com.example.majid.forurcomfy;
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+>>>>>>> Shopping Cart internal Catalog no firebase
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+<<<<<<< HEAD
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+=======
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.List;
+>>>>>>> Shopping Cart internal Catalog no firebase
 
 public class CatalogActivity extends Activity {
 

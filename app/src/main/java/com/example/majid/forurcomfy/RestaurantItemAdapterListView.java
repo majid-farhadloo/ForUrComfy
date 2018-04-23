@@ -48,7 +48,8 @@ public class RestaurantItemAdapterListView extends ArrayAdapter<RestaurantItem> 
         InputStream inputStream = null;
         try {
             String imageFile = item.getImage();
-            inputStream = getContext().getAssets().open(imageFile);
+           // File file = new File(getFilesDir(), assetsRestaurants);
+            inputStream = getContext().getAssets().open("asset/" + "assetsRestaurants");
             Drawable d = Drawable.createFromStream(inputStream, null);
             imageView.setImageDrawable(d);
         } catch (IOException e) {

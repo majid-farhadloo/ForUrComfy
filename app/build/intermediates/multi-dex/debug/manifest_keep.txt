@@ -1,0 +1,3 @@
+# Referenced at /Users/jasonpieros/Downloads/ForUrComfy/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:26
+-keep class android.support.multidex.MultiDexApplication { <init>(...); }
+

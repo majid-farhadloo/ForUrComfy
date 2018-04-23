@@ -1,6 +1,14 @@
 package com.example.majid.forurcomfy;
+<<<<<<< HEAD
 import android.graphics.drawable.Drawable;
 public class Product {
+=======
+
+import android.graphics.drawable.Drawable;
+
+public class Product {
+
+>>>>>>> Shopping Cart internal Catalog no firebase
     public String title;
     public Drawable productImage;
     public String description;
@@ -15,5 +23,9 @@ public class Product {
         this.price = price;
     }
 
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> Shopping Cart internal Catalog no firebase

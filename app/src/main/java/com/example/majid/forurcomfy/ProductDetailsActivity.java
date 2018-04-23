@@ -1,7 +1,10 @@
 package com.example.majid.forurcomfy;
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+>>>>>>> Shopping Cart internal Catalog no firebase
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> Shopping Cart internal Catalog no firebase
 public class ProductDetailsActivity extends Activity {
 
     @Override
@@ -18,7 +26,11 @@ public class ProductDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.productdetails);
 
+<<<<<<< HEAD
         List<Product> catalog = ShoppingCartHelper.getCatalog(getResources()); // changed '
+=======
+        List<Product> catalog = ShoppingCartHelper.getCatalog(getResources());
+>>>>>>> Shopping Cart internal Catalog no firebase
         final List<Product> cart = ShoppingCartHelper.getCart();
 
         int productIndex = getIntent().getExtras().getInt(ShoppingCartHelper.PRODUCT_INDEX);
@@ -51,4 +63,8 @@ public class ProductDetailsActivity extends Activity {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Shopping Cart internal Catalog no firebase

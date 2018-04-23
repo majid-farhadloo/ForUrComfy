@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
@@ -6,4 +7,15 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ForUrComfy.iml" filepath="$PROJECT_DIR$/ForUrComfy.iml" />
+      <module fileurl="file://C:\Majid\CSCI152\mainProject\ForUrComfy\ForUrComfy-master.iml" filepath="C:\Majid\CSCI152\mainProject\ForUrComfy\ForUrComfy-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+>>>>>>> Shopping Cart internal Catalog no firebase
 </project>
