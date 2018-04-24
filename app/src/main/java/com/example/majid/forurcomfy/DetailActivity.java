@@ -33,7 +33,10 @@ package com.example.majid.forurcomfy;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +68,14 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
         }
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Added to Your Shopping Cart", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         tvName = (TextView) findViewById(R.id.tvItemName);
         tvPrice = (TextView) findViewById(R.id.tvPrice);
         tvDescription = (TextView) findViewById(R.id.tvDescription);

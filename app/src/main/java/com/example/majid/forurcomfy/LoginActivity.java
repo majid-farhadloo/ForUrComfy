@@ -55,40 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                     sendPost(email, password);
                     mDialog.dismiss();
                 }
-                // table_user.addValueEventListener(new ValueEventListener() {
-                //  @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        // check if user doesn't exist in database
-//                        if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
-//                            mDialog.dismiss();
-//                            Post user = dataSnapshot.child(phoneNumber.getText().toString())
-//                                    .getValue(Post.class);
-//                            String pass = user.getPassword();
-//                            if (pass.equals(password.getText().toString())) {
-//                                Toast.makeText(LoginActivity.this, "Login successfully",
-//                                        Toast.LENGTH_SHORT).show();
-////                                Intent LoginIntent = new Intent(LoginActivity.
-////                                        this, UserAreaActivity.class);
-////                             //   LoginIntent.putExtra("Phone", (Parcelable) user);
-////                                LoginActivity.this.startActivity(LoginIntent);
-//                            } else {
-//                                Toast.makeText(LoginActivity.this,
-//                                        "Login Failed !!!", Toast.LENGTH_SHORT).show();
-//                            }
-//                        } else {
-//                            mDialog.dismiss();
-//                            Toast.makeText(LoginActivity.this, "User does not exist",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-//            }
-                // });
                 forgotPassword.setOnClickListener(new View.OnClickListener()
 
                 {
@@ -99,10 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         LoginActivity.this.startActivity(forgotPassIntent);
                     }
                 });
-
-
             }
-
             public void sendPost(final String email, String password) {
                 mAPIService.savePost(email, password).enqueue(new Callback<Post>() {
                     public static final String TAG = "tag";
@@ -114,11 +77,11 @@ public class LoginActivity extends AppCompatActivity {
 //                            showResponse(response.body().toString());
 //                            Log.i(TAG, "post submitted to API." + response.body().toString());
                             Intent LoginIntent = new Intent(LoginActivity.
-                                        this, Home.class);
+                                    this, Home.class);
                             Current.currentUser = new Post(email);
-                                LoginIntent.putExtra("email", email);
-                                LoginActivity.this.startActivity(LoginIntent);
-                                finish();
+                            LoginIntent.putExtra("email", email);
+                            LoginActivity.this.startActivity(LoginIntent);
+                            finish();
                         }
                     }
 
@@ -135,7 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
-    /*private boolean validateLogin(String username, String password) {
+
+        });
+    }
+}
+  /*private boolean validateLogin(String username, String password) {
         if (username == null || username.trim().length() == 0) {
             Toast.makeText(this, "Your Email address is required"
                     , Toast.LENGTH_SHORT).show();
@@ -181,9 +148,39 @@ public class LoginActivity extends AppCompatActivity {
         });
     }*/
 
-        });
-    }
-}
 
-
+// table_user.addValueEventListener(new ValueEventListener() {
+//  @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        // check if user doesn't exist in database
+//                        if (dataSnapshot.child(phoneNumber.getText().toString()).exists()) {
+//                            mDialog.dismiss();
+//                            Post user = dataSnapshot.child(phoneNumber.getText().toString())
+//                                    .getValue(Post.class);
+//                            String pass = user.getPassword();
+//                            if (pass.equals(password.getText().toString())) {
+//                                Toast.makeText(LoginActivity.this, "Login successfully",
+//                                        Toast.LENGTH_SHORT).show();
+////                                Intent LoginIntent = new Intent(LoginActivity.
+////                                        this, UserAreaActivity.class);
+////                             //   LoginIntent.putExtra("Phone", (Parcelable) user);
+////                                LoginActivity.this.startActivity(LoginIntent);
+//                            } else {
+//                                Toast.makeText(LoginActivity.this,
+//                                        "Login Failed !!!", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } else {
+//                            mDialog.dismiss();
+//                            Toast.makeText(LoginActivity.this, "User does not exist",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//            }
+// });
 

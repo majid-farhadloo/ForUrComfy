@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.majid.forurcomfy.OrderActivity">
 
     <TextView
@@ -14,6 +19,7 @@
         android:layout_marginEnd="43dp"
         android:layout_marginStart="43dp"
         android:layout_marginTop="16dp"
+        android:textColor="@color/font_color"
         android:text="Restaurants To Order From"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toTopOf="@+id/bRestaurant"
@@ -22,15 +28,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bRestaurant"
+        android:id="@+id/tacobell"
         android:layout_width="369dp"
         android:layout_height="81dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="47dp"
         android:background="@android:color/white"
-        android:drawableLeft="@drawable/bgb4"
-        android:gravity="left|center"
-        android:text="Veggie Restaurant-0"
+        android:drawableLeft="@drawable/taco_bell"
+        android:gravity="center"
+        android:text="Taco Bell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,19 +48,45 @@
         android:id="@+id/pandaExpress"
         android:layout_width="369dp"
         android:layout_height="81dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="136dp"
         android:background="@android:color/white"
         android:drawableLeft="@drawable/panda_express"
         android:gravity="center_vertical|center"
         android:text="Panda Express"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bRestaurant"
-        app:layout_constraintVertical_bias="0.02"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/subway"
+        android:layout_width="369dp"
+        android:layout_height="81dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="224dp"
+        android:background="@android:color/white"
+        android:drawableLeft="@drawable/subway_logo_og"
+        android:gravity="center_vertical|center"
+        android:text="Subway"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/myRestaurant"
+        android:layout_width="369dp"
+        android:layout_height="81dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="312dp"
+        android:background="@android:color/white"
+        android:drawableLeft="@drawable/my_restaurant"
+        android:gravity="center_vertical|center"
+        android:text="My Restaurant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>

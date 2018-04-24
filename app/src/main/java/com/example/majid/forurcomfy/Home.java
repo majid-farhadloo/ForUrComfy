@@ -2,9 +2,6 @@ package com.example.majid.forurcomfy;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.majid.forurcomfy.Common.Current;
@@ -26,19 +25,32 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        final Button tacoBell = (Button) findViewById(R.id.tacobell);
+        final Button pandaExpress = (Button) findViewById(R.id.pandaExpress);
+        final Button subway = (Button) findViewById(R.id.subway);
+        final Button myRestaurant = (Button) findViewById(R.id.myRestaurant);
+
+        myRestaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent OrderIntent = new Intent(Home.
+                        this, UserAreaActivity.class);
+                Home.this.startActivity(OrderIntent);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -97,23 +109,23 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.deliverer) {
             // Handle the camera action
-            Intent intent = new Intent(Home.this, Home.class); // this second home should be deliverer
+            Intent intent = new Intent(Home.this, DeliverActivity.class); // this second home should be deliverer
             startActivity(intent);
         } else if (id == R.id.user) {
-            Intent intent = new Intent(Home.this, LoginActivity.class); // this second home should be deliverer
-            startActivity(intent);
+//            Intent intent = new Intent(Home.this, LoginActivity.class); // this second home should be deliverer
+//            startActivity(intent);
 
 
         } else if (id == R.id.nav_menu) {
-            Intent intent = new Intent(Home.this, VeggiMenuActivity.class); // this second home should be deliverer
+            Intent intent = new Intent(Home.this, Home.class); // this second home should be deliverer
             startActivity(intent);
 
         } else if (id == R.id.nav_cart) {
             Intent intent = new Intent(Home.this, ShoppingCartActivity.class); // this second home should be cartactivity
             startActivity(intent);
 
-        } else if (id == R.id.nav_orders) {
-            Intent intent = new Intent(Home.this, OrderActivity.class); // this second home should be deliverer
+        } else if (id == R.id.nav_payment) {
+            Intent intent = new Intent(Home.this, PaymentActivity.class); // this second home should be deliverer
             startActivity(intent);
 
         } else if (id == R.id.nav_logout) {

@@ -12,13 +12,16 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-        final Button bRestaurant = (Button) findViewById(R.id.bRestaurant);
+        final Button tacoBell = (Button) findViewById(R.id.tacobell);
+        final Button pandaExpress = (Button) findViewById(R.id.pandaExpress);
+        final Button subway = (Button) findViewById(R.id.subway);
+        final Button myRestaurant = (Button) findViewById(R.id.myRestaurant);
 
-        bRestaurant.setOnClickListener(new View.OnClickListener() {
+        myRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent OrderIntent = new Intent(OrderActivity.
-                        this,VeggiMenuActivity.class);
+                        this,UserAreaActivity.class);
                 OrderActivity.this.startActivity(OrderIntent);
             }
         });

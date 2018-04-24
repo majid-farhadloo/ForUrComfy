@@ -24,9 +24,9 @@
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="Cart" />
         <item
-            android:id="@+id/nav_orders"
+            android:id="@+id/nav_payment"
             android:icon="@drawable/ic_archive_black_24dp"
-            android:title="Orders" />
+            android:title="Payment" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_exit_to_app_black_24dp"

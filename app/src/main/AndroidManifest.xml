@@ -39,13 +39,15 @@
         <activity android:name=".OrderActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".CatalogActivity" />
-        <activity android:name=".ProductDetailsActivity" /> //added
-        <activity android:name=".ShoppingCartActivity" />  //added
-
+        <activity android:name=".ProductDetailsActivity" />
+        //added
+        <activity android:name=".ShoppingCartActivity" />
+        //added
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DeliverActivity"></activity>
     </application>
 
 </manifest>
