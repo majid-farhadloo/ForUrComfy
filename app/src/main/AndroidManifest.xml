@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -48,6 +44,19 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DeliverActivity"></activity>
+        <activity
+            android:name=".ReturnActivity"
+            android:parentActivityName=".ReturnActivity">
+                <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+        </activity>
+        <service
+            android:name=".Services.MyService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
