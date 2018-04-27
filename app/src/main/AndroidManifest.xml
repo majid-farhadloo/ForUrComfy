@@ -48,6 +48,14 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DeliverActivity"></activity>
+        <activity
+            android:name=".ReturnActivity"
+            android:parentActivityName=".ReturnActivity">
+        </activity>
+        <service
+            android:name=".Services.MyService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
