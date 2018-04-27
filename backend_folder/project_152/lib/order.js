@@ -5,8 +5,8 @@ var orderSchema = new mongoose.Schema({
   price : Number,
   quantity: Number,
   currentUser: String,
-  time : String,
-  completed: Boolean
+  completed: Boolean,
+  time: Date
 });
 
 var order = mongoose.model ('order',orderSchema);
