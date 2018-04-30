@@ -31,6 +31,7 @@
 
 package com.example.majid.forurcomfy;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -41,7 +42,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.majid.forurcomfy.Data.model.DataItem;
+import com.example.majid.forurcomfy.Data.model.FoodMenu;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        DataItem item = getIntent().getExtras().getParcelable(DataItemAdapter.ITEM_KEY);
+        FoodMenu item = getIntent().getExtras().getParcelable(DataItemAdapter.ITEM_KEY);
         if (item != null) {
             Toast.makeText(this, "Received item " + item.getItemId(),
                     Toast.LENGTH_SHORT);
@@ -72,10 +73,25 @@ public class DetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent shoppingIntent = new Intent(DetailActivity.
+                        this,ShoppingCartActivity.class);
+                startActivity(shoppingIntent);
+                Snackbar.make(view, "Go to Cart", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        FloatingActionButton cart = (FloatingActionButton) findViewById(R.id.cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
                 Snackbar.make(view, "Added to Your Shopping Cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+
+
         tvName = (TextView) findViewById(R.id.tvItemName);
         tvPrice = (TextView) findViewById(R.id.tvPrice);
         tvDescription = (TextView) findViewById(R.id.tvDescription);

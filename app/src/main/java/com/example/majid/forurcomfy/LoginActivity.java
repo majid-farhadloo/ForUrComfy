@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
-            public void sendPost(final String email, String password) {
+            private void sendPost(final String email, String password) {
                 mAPIService.savePost(email, password).enqueue(new Callback<Post>() {
                     public static final String TAG = "tag";
 

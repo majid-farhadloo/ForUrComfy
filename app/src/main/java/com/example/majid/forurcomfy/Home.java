@@ -121,7 +121,7 @@ public class Home extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_cart) {
-            Intent intent = new Intent(Home.this, ShoppingCartActivity.class); // this second home should be cartactivity
+            Intent intent = new Intent(Home.this, CatalogActivity.class); // this second home should be cartactivity
             startActivity(intent);
 
         } else if (id == R.id.nav_payment) {

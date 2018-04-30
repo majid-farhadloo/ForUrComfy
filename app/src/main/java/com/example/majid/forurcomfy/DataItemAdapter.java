@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.majid.forurcomfy.Data.model.DataItem;
+import com.example.majid.forurcomfy.Data.model.FoodMenu;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,14 +21,15 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
     public static final String ITEM_ID_KEY = "item_id_key";
     public static final String ITEM_KEY = "item_key" ;
-    private List<DataItem> mItems;
+    private List<FoodMenu> mItems;
+    //private List<FoodMenu> mItems2;
+
     private Context mContext;
 
-    public DataItemAdapter(Context context, List<DataItem> items) {
+    public DataItemAdapter(Context context, List<FoodMenu> items) {
         this.mContext = context;
         this.mItems = items;
     }
-
     @Override
     public DataItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -39,11 +40,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(DataItemAdapter.ViewHolder holder, int position) {
-        final DataItem item = mItems.get(position);
+        final FoodMenu item = mItems.get(position);
         InputStream inputStream = null;
         try {
             holder.tvName.setText(item.getItemName());
-            String imageFile = item.getImage();
+            String imageFile = item.image;
             inputStream = mContext.getAssets().open(imageFile);
             Drawable d = Drawable.createFromStream(inputStream, null);
             holder.imageView.setImageDrawable(d);
@@ -61,11 +62,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(mContext, "You selected " +
-//                        item.getItemName(), Toast.LENGTH_SHORT).show();
-                // String itemId = item.getItemId();
+                Toast.makeText(mContext, "You selected " +
+                        item.getItemName(), Toast.LENGTH_SHORT).show();
+                 String itemId = item.getItemId();
                 Intent intent = new Intent(mContext,DetailActivity.class);
-                //intent.putExtra(ITEM_ID_KEY,itemId);
+                intent.putExtra(ITEM_ID_KEY,itemId);
                 intent.putExtra(ITEM_KEY,item);
                 mContext.startActivities(new Intent[]{intent});
             }
@@ -74,7 +75,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
             @Override
             public boolean onLongClick(View view) {
                 Toast.makeText(mContext, "You long clicked " +
-                        item.getItemName(), Toast.LENGTH_SHORT).show();
+                        item.itemName, Toast.LENGTH_SHORT).show();
                 return false;
             }
 
