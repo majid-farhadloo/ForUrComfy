@@ -18,20 +18,19 @@ db.on("error", function (err) {
 // console.log(query['foodName']);
 
 router.get('/', function(req, res) {
-    order.find({completed:false}, function(err, result) {
-    if (err) throw err;
-    //  {
-    //     "_id": "5ad524b4a5e9280649091d82",
-    //     "foodName": "kungpao chicken",
-    //     "price": 5.99,
-    //     "quantity": 2,
-    //     "currentUser": "Calvin",
-    //     "time": "Mon Apr 16 2018 15:33:24 GMT-0700",
-    //     "__v": 0
-    // },
+    // var returnorder = order.find({completed:false}, function(err, result) {
+    // if (err) throw err;
+    order.findOne({completed:false}).sort('time').exec(function(err,result)
+  {
+    if(err) throw err;
+    res.json(result);
     // res.send('respond with a resource');
     // var user  = req.session.user;
+    // result.sort('time',1);
+    // res.send(result);
     });
+
+
   });
 
 module.exports = router;
