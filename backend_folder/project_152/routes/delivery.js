@@ -20,7 +20,7 @@ db.on("error", function (err) {
 router.get('/', function(req, res) {
     // var returnorder = order.find({completed:false}, function(err, result) {
     // if (err) throw err;
-    order.findOne({completed:false}).sort('time').exec(function(err,result)
+    order.findOne({completed:false}).sort({_id: 1}).exec(function(err,result)
   {
     if(err) throw err;
     res.json(result);
