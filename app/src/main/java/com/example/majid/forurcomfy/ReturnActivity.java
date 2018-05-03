@@ -31,7 +31,7 @@ public class ReturnActivity extends AppCompatActivity {
     List<DataItem> dataItemList;
     DataItemAdapter mItemAdapter;
     RecyclerView mRecyclerView;
-    public static final String JSON_URL = "https://node-practice0208.herokuapp.com/food_menu";
+    public static final String JSON_URL = "https://node-practice0208.herokuapp.com/food_menu/";
 
     private APIService mAPIService;
 
@@ -39,8 +39,7 @@ public class ReturnActivity extends AppCompatActivity {
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            FoodMenu[] mItemList = (FoodMenu []) intent
-                    .getParcelableArrayExtra(MyService.MY_SERVICE_PAYLOAD);
+            FoodMenu[] mItemList = (FoodMenu[]) intent.getParcelableArrayExtra(MyService.MY_SERVICE_PAYLOAD);
             Toast.makeText(ReturnActivity.this,
                     "Received " + mItemList.length + " items from service",
                     Toast.LENGTH_SHORT).show();

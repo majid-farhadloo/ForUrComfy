@@ -7,6 +7,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.example.majid.forurcomfy.Data.model.DataItem;
+import com.example.majid.forurcomfy.Data.model.FoodMenu;
 import com.example.majid.forurcomfy.Utlis.HttpHelper;
 import com.google.gson.Gson;
 
@@ -39,7 +40,8 @@ public class MyService extends IntentService {
             return;
         }
         Gson gson  = new Gson();
-        DataItem[] dataItems = gson.fromJson(response, DataItem[].class);
+        FoodMenu[] dataItems = gson.fromJson(response, FoodMenu[].class);
+        Log.i("DATAPASS", "data passed :" + dataItems);
         Intent intentMessage  = new Intent (MY_SERVICE_MESSAGE);
         intentMessage.putExtra(MY_SERVICE_PAYLOAD,dataItems);
         LocalBroadcastManager manager =
