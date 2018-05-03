@@ -1,28 +1,36 @@
 package com.example.majid.forurcomfy;
-import java.util.List;
-
-
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.List;
 
 public class ShoppingCartActivity extends Activity {
 
     private List<Product> mCartList;
     private ProductAdapter mProductAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shoppingcart);
+        final Button btn2 = (Button) findViewById(R.id.Button02);
 
 
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent finish = new Intent(ShoppingCartActivity.
+                        this,DeliveryRequestActivity.class);
+                startActivity(finish);
+            }
+        });
         mCartList = ShoppingCartHelper.getCartList();
 
         // Make sure to clear the selections

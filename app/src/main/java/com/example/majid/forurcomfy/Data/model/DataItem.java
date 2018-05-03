@@ -1,34 +1,65 @@
 package com.example.majid.forurcomfy.Data.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.UUID;
 
-public class DataItem implements Parcelable {
+public class DataItem {
 
-    private String itemId;
-    private String itemName;
-    private String description;
-    private String category;
-    private int sortPosition;
-    private double price;
-    private String image;
+    public String id;
+    public String itemId;
+    public String itemName;
+    public String category;
+    public String description;
+    public int sortPosition;
+    public int price;
+    public String image;
 
     public DataItem() {
     }
 
-    public DataItem(String itemId, String itemName, String category, String description , int sortPosition, double price, String image) {
-        if (itemId == null){
+    public DataItem(String id, String itemId,
+                    String itemName,
+                    String description, int sortPosition, int price, String image) {
+
+        if (itemId == null) {
             itemId = UUID.randomUUID().toString();
         }
+        this.id = id;
         this.itemId = itemId;
         this.itemName = itemName;
-        this.description = description;
         this.category = category;
+        this.description = description;
         this.sortPosition = sortPosition;
         this.price = price;
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "DataItem{" +
+                "itemId='" + itemId + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", sortPosition=" + sortPosition +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                '}';
+    }
+
+
+
+
+
+
+
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getItemId() {
@@ -47,20 +78,20 @@ public class DataItem implements Parcelable {
         this.itemName = itemName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getSortPosition() {
@@ -71,11 +102,11 @@ public class DataItem implements Parcelable {
         this.sortPosition = sortPosition;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -86,56 +117,4 @@ public class DataItem implements Parcelable {
     public void setImage(String image) {
         this.image = image;
     }
-
-
-    @Override
-    public String toString() {
-        return "DataItem{" +
-                "itemId='" + itemId + '\'' +
-                ", itemName='" + itemName + '\'' +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", sortPosition=" + sortPosition +
-                ", price=" + price +
-                ", image='" + image + '\'' +
-                '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.itemId);
-        dest.writeString(this.itemName);
-        dest.writeString(this.description);
-        dest.writeString(this.category);
-        dest.writeInt(this.sortPosition);
-        dest.writeDouble(this.price);
-        dest.writeString(this.image);
-    }
-
-    protected DataItem(Parcel in) {
-        this.itemId = in.readString();
-        this.itemName = in.readString();
-        this.description = in.readString();
-        this.category = in.readString();
-        this.sortPosition = in.readInt();
-        this.price = in.readDouble();
-        this.image = in.readString();
-    }
-
-    public static final Parcelable.Creator<DataItem> CREATOR = new Parcelable.Creator<DataItem>() {
-        @Override
-        public DataItem createFromParcel(Parcel source) {
-            return new DataItem(source);
-        }
-
-        @Override
-        public DataItem[] newArray(int size) {
-            return new DataItem[size];
-        }
-    };
 }

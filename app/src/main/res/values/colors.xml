@@ -7,4 +7,6 @@
     <color name="overLayBackground">#7f333639</color>
     <color name="button">#789134</color>
     <color name="overLayActionBr">#0e0d0e</color>
+    <color name="transparent">#80001f3f</color>
+
 </resources>
