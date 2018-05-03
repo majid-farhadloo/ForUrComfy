@@ -33,4 +33,20 @@ router.get('/', function(req, res) {
 
   });
 
+  router.get('/all', function(req, res) {
+      // var returnorder = order.find({completed:false}, function(err, result) {
+      // if (err) throw err;
+      order.find({completed:false}).sort('time').exec(function(err,result)
+    {
+      if(err) throw err;
+      res.json(result);
+      // res.send('respond with a resource');
+      // var user  = req.session.user;
+      // result.sort('time',1);
+      // res.send(result);
+      });
+
+
+    });
+
 module.exports = router;

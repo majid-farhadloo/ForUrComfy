@@ -111,7 +111,7 @@ router.post('/login',bruteforce.prevent,function(req,res,next)
   })
 });
 
-router.get('/menu',function(req,res){
+router.get('/check_session',function(req,res){
 	if(!req.session.user){
 		return res.json({
 			"result": false,
