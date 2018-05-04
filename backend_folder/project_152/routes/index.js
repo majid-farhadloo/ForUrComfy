@@ -155,6 +155,29 @@ router.post('/finding_pwd', function(req, res)
     }
 
     var data = {randomstring: randomstring};
+    var query = { email : user_email};
+    var newVal = { $set: {password: md5(randomstring)} };
+
+    User.findOne({email:user_email},function(err,user){
+        if(err) {
+            console.log(err);
+            res.json(err);
+        } else {
+            if(user==null) {
+                console.log("Email doesn't exist");
+                res.json({"result":false, "message":"Email doesn't exist"});
+            }else{
+                User.updateOne(query, newVal, function(err, res) {
+                    if(err) {
+                        throw err;
+                    } else {
+                        console.log("password updated");
+                    }
+                });
+            }
+        }
+    });
+
 
     var transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -182,6 +205,5 @@ router.post('/finding_pwd', function(req, res)
     });
         
 });
-
 
 module.exports = router;
