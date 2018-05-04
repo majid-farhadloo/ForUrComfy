@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var food_menu = require('../lib/menu');
+var rest_item = require('../lib/restaurant_item');
 var mongoose = require('mongoose');
 
 //CONNECT TO DATABASE
@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
     // return res.json({"result":false,
     //                   "message":"User not logged in"
     //                 });
-    food_menu.find(function(err, result) {
+    rest_item.find(function(err, result) {
 	    if(err) {
 	        next(err);
 	    } else {
