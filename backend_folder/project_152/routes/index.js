@@ -4,6 +4,9 @@ var User = require('../lib/User');
 var md5= require('md5');
 var mongoose = require('mongoose');
 var ExpressBrute = require ('express-brute');
+var nodemailer = require('nodemailer');
+var jade = require('jade');
+const filePath = __dirname + '/find_pwd.jade';
 
 var store = new ExpressBrute.MemoryStore();
 var bruteforce = new ExpressBrute(store,{
@@ -139,6 +142,46 @@ router.get('/logout',function(req,res)
 	});
 })
 
+router.post('/finding_pwd', function(req, res)
+{
+    var user_email = req.body.user_email;
+
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    var string_length = 8;
+    var randomstring = '';
+    for (var i=0; i<string_length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum,rnum+1);
+    }
+
+    var data = {randomstring: randomstring};
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'forurcomfy.help@gmail.com',
+        pass: 'rnrmfrnrmf!@#'
+      }
+    });
+
+    var mailOptions = {
+      from: 'forurcomfy.help@gmail.com',
+      to: user_email,
+      subject: 'Temporary password from ForUrComfy',
+      // text: 'Your temporary password is ' + randomstring +'.'
+      html: jade.renderFile(filePath, data)
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            return res.json({"result":true, "message":"Email sent to " + user_email});
+        }
+    });
+        
+});
 
 
 module.exports = router;
