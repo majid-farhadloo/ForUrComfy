@@ -43,10 +43,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.Sample.SampleDataProvider;
+import com.example.majid.forurcomfy.ShoppingCart.ShoppingCartWindow;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -54,6 +57,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView tvName, tvDescription, tvPrice;
     private ImageView itemImage;
+    List<FoodMenu> dataItemList = SampleDataProvider.dataItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent shoppingIntent = new Intent(DetailActivity.
-                        this,ShoppingCartActivity.class);
+                        this,ShoppingCartWindow.class);
                 startActivity(shoppingIntent);
                 Snackbar.make(view, "Go to Cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

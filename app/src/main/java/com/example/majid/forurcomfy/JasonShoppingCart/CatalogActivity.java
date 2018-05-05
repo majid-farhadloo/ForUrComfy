@@ -1,6 +1,4 @@
-package com.example.majid.forurcomfy;
-
-import java.util.List;
+package com.example.majid.forurcomfy.JasonShoppingCart;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.example.majid.forurcomfy.R;
+
+import java.util.List;
 
 public class CatalogActivity extends Activity {
 

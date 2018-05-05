@@ -1,4 +1,4 @@
-package com.example.majid.forurcomfy;
+package com.example.majid.forurcomfy.JasonShoppingCart;
 
 
 import java.util.HashMap;
@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Vector;
 
 import android.content.res.Resources;
+
+import com.example.majid.forurcomfy.R;
 
 public class ShoppingCartHelper {
 

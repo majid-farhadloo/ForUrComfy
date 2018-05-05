@@ -19,8 +19,6 @@ public interface RegisterService {
                         @Field("email") String email,
                         @Field("password") String pass);
 }
-
-
 //public interface RegisterService {
 //    @GET("Register/{firstName}/{LastName}/{cellPhone}/{email}/{password}/{reTypePassword}")
 //    Call<ResObj> register(@Path("firstName") String firstName, @Path("LastName") String LastName

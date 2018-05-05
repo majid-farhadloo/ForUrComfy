@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.majid.forurcomfy.Common.Current;
+import com.example.majid.forurcomfy.JasonShoppingCart.CatalogActivity;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +35,7 @@ public class Home extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent OrderIntent = new Intent(Home.
-                        this, UserAreaActivity.class);
+                        this, ReturnActivity.class);
                 Home.this.startActivity(OrderIntent);
             }
         });

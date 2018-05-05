@@ -35,37 +35,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UserAreaActivity" />
         </activity>
-        <activity android:name=".VeggiMenuActivity" />
+        <activity android:name=".Extras.VeggiMenuActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".PaymentActivity"
-            android:parentActivityName=".DeliveryRequestActivity"/>
-        <activity android:name=".CatalogActivity" />
-        <activity android:name=".ProductDetailsActivity" />
-        //added
-        <activity android:name=".ShoppingCartActivity" />
-        <activity android:name=".ReturnActivity" />
-        //added
+        <activity
+            android:name=".PaymentActivity"
+            android:parentActivityName=".DeliveryRequestActivity" />
+        <activity android:name=".JasonShoppingCart.CatalogActivity" />
+        <activity android:name=".JasonShoppingCart.ProductDetailsActivity" />
+        <activity android:name=".JasonShoppingCart.ShoppingCartActivity" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-<<<<<<< HEAD
         <activity android:name=".DeliverActivity" />
-        <activity android:name=".DeliveryRequestActivity"
-            android:parentActivityName=".ShoppingCartActivity">
-
-        </activity>
-=======
-        <activity android:name=".DeliverActivity"></activity>
+        <activity
+            android:name=".DeliveryRequestActivity"
+            android:parentActivityName=".JasonShoppingCart.ShoppingCartActivity" />
         <activity
             android:name=".ReturnActivity"
-            android:parentActivityName=".ReturnActivity">
-        </activity>
+            android:parentActivityName=".ReturnActivity" />
+
         <service
             android:name=".Services.MyService"
             android:enabled="true"
             android:exported="false" />
->>>>>>> 904a2fdac534e3d5bfd29aee36817646e4ba8e9e
+
+        <activity android:name=".ShoppingCart.ShoppingCartWindow" />
+        <activity android:name=".RequestDelivery"></activity>
     </application>
 
 </manifest>

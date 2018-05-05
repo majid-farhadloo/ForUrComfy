@@ -1,8 +1,10 @@
 package com.example.majid.forurcomfy.Remote;
 
 import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.ShoppingCart.ShoppingItem;
 import com.example.majid.forurcomfy.model.Post;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,4 +25,16 @@ public interface APIService {
 
     @GET("/food_menu")
     Call<List<FoodMenu>> reqData();
+
+    @POST("/order")
+    @FormUrlEncoded
+    Call<Post> request(@Field("foodName") String foodName,
+                        @Field("price") String price,
+                        @Field("cell") String cell,
+                        @Field("location") String address,
+                        @Field("quantity") String quantity,
+                        @Field("time") Date date);
+
+    @GET("/delivery")
+    Call<List<ShoppingItem>> reqDelivery();
 }

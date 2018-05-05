@@ -1,5 +1,6 @@
 package com.example.majid.forurcomfy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
@@ -23,6 +24,9 @@ public class DeliverActivity extends AppCompatActivity implements
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (switchCase.isChecked()) {
+            Intent requestDelivery = new Intent(DeliverActivity.this,RequestDelivery.class);
+            DeliverActivity.this.startActivity(requestDelivery);
+            finish();
             tvSate.setText("The Switch Is On");
             Toast.makeText(getApplicationContext(), " The Switch is on",
                     Toast.LENGTH_SHORT).show();

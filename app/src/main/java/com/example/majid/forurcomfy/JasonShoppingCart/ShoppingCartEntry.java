@@ -1,4 +1,4 @@
-package com.example.majid.forurcomfy;
+package com.example.majid.forurcomfy.JasonShoppingCart;
 
 public class ShoppingCartEntry {
 

@@ -1,4 +1,4 @@
-package com.example.majid.forurcomfy;
+package com.example.majid.forurcomfy.Extras;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,19 +10,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.majid.forurcomfy.Data.model.DataItem;
+import com.example.majid.forurcomfy.R;
+import com.example.majid.forurcomfy.Restaurants.RestaurantItem;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class DataItemAdapterListView extends ArrayAdapter<DataItem> {
+public class RestaurantItemAdapterListView extends ArrayAdapter<RestaurantItem> {
 
-    List<DataItem> mDataItems;
+    List<RestaurantItem> mDataItems;
     LayoutInflater mInflater;
 
-    public DataItemAdapterListView(Context context, List<DataItem> objects) {
-        super(context, R.layout.list_item, objects);
+    public RestaurantItemAdapterListView(Context context, List<RestaurantItem> objects) {
+        super(context, R.layout.restaurant_item, objects);
 
         mDataItems = objects;
         mInflater = LayoutInflater.from(context);
@@ -40,7 +41,7 @@ public class DataItemAdapterListView extends ArrayAdapter<DataItem> {
         TextView tvName = (TextView) convertView.findViewById(R.id.itemNameText);
         ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
 
-        DataItem item = mDataItems.get(position);
+        RestaurantItem item = mDataItems.get(position);
 
         tvName.setText(item.getItemName());
 //        imageView.setImageResource(R.drawable.apple_pie);
@@ -48,7 +49,8 @@ public class DataItemAdapterListView extends ArrayAdapter<DataItem> {
         InputStream inputStream = null;
         try {
             String imageFile = item.getImage();
-            inputStream = getContext().getAssets().open(imageFile);
+           // File file = new File(getFilesDir(), assetsRestaurants);
+            inputStream = getContext().getAssets().open("asset/" + "assetsRestaurants");
             Drawable d = Drawable.createFromStream(inputStream, null);
             imageView.setImageDrawable(d);
         } catch (IOException e) {
