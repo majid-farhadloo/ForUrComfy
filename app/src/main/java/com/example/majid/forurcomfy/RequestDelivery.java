@@ -50,7 +50,7 @@ public class RequestDelivery extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_delivery);
+        setContentView(R.layout.activity_d_r);
         networkOk = NetworkHelper.hasNetworkAccess(this);
         if (networkOk) {
             Intent intent = new Intent(this, DeliveryService.class);
