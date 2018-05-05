@@ -35,6 +35,6 @@ public interface APIService {
                         @Field("quantity") String quantity,
                         @Field("time") Date date);
 
-    @GET("/delivery")
+    @GET("/delivery/request")
     Call<List<ShoppingItem>> reqDelivery();
 }

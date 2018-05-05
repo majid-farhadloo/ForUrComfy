@@ -13,6 +13,7 @@ public class ShoppingItem {
     private String location;
     private int price, quantity;
     private Date date;
+
 //    private String image;
 
 //    public String getImage() {
