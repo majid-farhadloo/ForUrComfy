@@ -11,49 +11,62 @@ import android.widget.TextView;
 
 import com.example.majid.forurcomfy.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
+public class ShoppingListAdapter extends ArrayAdapter<Shopping> implements View.OnClickListener {
 
-    Context context;
+    private ArrayList<Shopping> dataSet;
+    Context mContext;
 
-    public ShoppingListAdapter(Context context, List<ShoppingItem> items){
-        super(context, 0, items);
-        this.context = context;
+    // View lookup cache
+    private static class ViewHolder {
+        public TextView txtFoodName;
+        public TextView txtPrice;
+        public TextView txtQuantity;
+        public TextView txtTotalprice;
+
     }
 
-    @NonNull
+    public ShoppingListAdapter(ArrayList<Shopping> data, Context context) {
+        super(context, R.layout.shopping_item, data);
+        this.dataSet = data;
+        this.mContext=context;
+    }
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public void onClick(View v) {
 
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.shopping_item, parent, false
-            );
-        }
+        int position=(Integer) v.getTag();
+        Object object= getItem(position);
+        Shopping shopping =(Shopping) object;
 
-        ShoppingItem currentItem = getItem(position);
+    }
 
-//        ImageView img = (ImageView) listItemView.findViewById(R.id.itemIcon);
-//        Picasso.with(getContext())
-//                .load(context.getApplicationContext().getString(R.string.ip)
-//                        + String.valueOf(currentItem.getProductID())
-//                        + ".jpg")
-//                .fit().centerCrop()
-//                .into(img);
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        // Get the data item for this position
+        final Shopping shopping = getItem(position);
+        // Check if an existing view is being reused, otherwise inflate the view
+        final ViewHolder viewHolder; // view lookup cache stored in tag
 
-        TextView name = (TextView) listItemView.findViewById(R.id.itemName);
-        name.setText(currentItem.getFoodName());
+        viewHolder = new ViewHolder();
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        convertView = inflater.inflate(R.layout.shopping_item, parent, false);
+        viewHolder.txtFoodName = (TextView) convertView.findViewById(R.id.shoppingItemName);
+        viewHolder.txtPrice = (TextView) convertView.findViewById(R.id.shoppingItemPrice);
+        viewHolder.txtQuantity = (TextView) convertView.findViewById(R.id.shoppingItemQuantity);
+        viewHolder.txtTotalprice = (TextView) convertView.findViewById(R.id.shoppingItemTotal);
 
-//        TextView description = (TextView) listItemView.findViewById(R.id.itemDescription);
-//        description.setText(currentItem.getDescription());
+        viewHolder.txtFoodName.setText(shopping.getFoodName());
+        viewHolder.txtPrice.setText(shopping.getPrice());
+        viewHolder.txtQuantity.setText(shopping.getQuantity());
+        viewHolder.txtTotalprice.setText(shopping.getTotalprice());
 
-        TextView cost = (TextView) listItemView.findViewById(R.id.itemPrice);
-        cost.setText(currentItem.getPrice());
+        convertView.setTag(viewHolder);
 
-        return listItemView;
+        // Return the completed view to render on screen
+        return convertView;
     }
 }
-//.resizeDimen(R.dimen.forImage, R.dimen.forImage)

@@ -15,26 +15,23 @@ import android.widget.TextView;
 import com.example.majid.forurcomfy.Common.Current;
 import com.example.majid.forurcomfy.PaymentActivity;
 import com.example.majid.forurcomfy.R;
+import com.example.majid.forurcomfy.Utlis.ShoppingDatabaseHelper;
 import com.example.majid.forurcomfy.model.Request;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShoppingCartWindow extends AppCompatActivity {
 
     private final String TAG = ShoppingCartWindow.class.getSimpleName();
-    //    FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    DatabaseReference myRef;
-    Boolean isCartEmpty = true;
-    TextView priceView;
-//    private FirebaseAuth mAuth;
-//    private FirebaseAuth.AuthStateListener mAuthListener;
-//    private FirebaseUser user;
-
-    int totalAmount = 0;
-    ArrayList<ShoppingItem> items;// =
+    private TextView priceView;
+    private ListView shoppingCartListView;
+    private ShoppingDatabaseHelper shoppingDatabaseHelper;
+    private static ArrayList<Shopping> shoppingCartList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,43 +39,22 @@ public class ShoppingCartWindow extends AppCompatActivity {
         setContentView(R.layout.activity_shopping_cart_window);
 
         priceView = (TextView) findViewById(R.id.totalPriceCheckout);
+        shoppingCartListView = (ListView) findViewById(R.id.shoppingCartList);
 
-        //mAuth = FirebaseAuth.getInstance();
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                user = firebaseAuth.getCurrentUser();
-//                if (user != null) {
-//                    // User is signed in
-//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-//                    myRef = database.getReference("users/" + user.getUid());
-//
-//                    // adding value event listener for myRef
-//                    myRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            if (dataSnapshot.getKey().equals(user.getUid())) {
-//                                Log.e("CART", dataSnapshot.child("isCartEmpty").getValue().toString());
-//                                isCartEmpty = (Boolean) dataSnapshot.child("isCartEmpty").getValue();
-//                                if (isCartEmpty) {
-//                                    priceView.setText(NumberFormat.getCurrencyInstance().format(0));
-//                                } else {
-//                                    setUpShoppingCart(dataSnapshot.child("cartItems"));
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError error) {
-//                            Log.w(TAG, "Failed to read value.", error.toException());
-//                        }
-//                    });
-//
-//                } else {
-//                    Log.d(TAG, "onAuthStateChanged:signed_out");
-//                }
-//            }
-//        };
+        shoppingDatabaseHelper = new ShoppingDatabaseHelper(this);
+        shoppingCartList = shoppingDatabaseHelper.getAllDatas();
+
+        if (shoppingCartList.size() > 0) {
+            shoppingCartListView.setAdapter(new ShoppingListAdapter(shoppingCartList, getApplicationContext()));
+        }
+
+        float totalAmount = 0;
+
+        for (Shopping shopping : shoppingCartList) {
+            totalAmount = totalAmount + Float.parseFloat(shopping.getTotalprice().substring(4));
+        }
+
+        priceView.setText("Rs. " + String.valueOf(totalAmount));
 
         (findViewById(R.id.returnToPrevPage)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +66,6 @@ public class ShoppingCartWindow extends AppCompatActivity {
         (findViewById(R.id.checkOut)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // Create new Request
                 showAlertDialog();
 
@@ -100,6 +75,7 @@ public class ShoppingCartWindow extends AppCompatActivity {
         (findViewById(R.id.clearCart)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                shoppingDatabaseHelper.deleteAll(Current.currentUser.getEmail().split("@")[0] + "ShoppingCartTable");
                 Snackbar.make(findViewById(R.id.shoppingCartWindowLayout),
                         "Cleared!",
                         Snackbar.LENGTH_SHORT).show();
@@ -109,74 +85,15 @@ public class ShoppingCartWindow extends AppCompatActivity {
         });
 
     }
-    private void setUpShoppingCart(DataSnapshot dataSnapshot) {
 
-        totalAmount = 0;
-
-        if (items != null){
-            items.clear();
-        } else {
-            items = new ArrayList<>();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (shoppingCartList.size() > 0) {
+            shoppingCartList.clear();
         }
-
-        for (DataSnapshot snap : dataSnapshot.getChildren()){
-
-            int itemPrice = -1, quantity = 0;
-
-            try{
-                itemPrice = Integer.valueOf(NumberFormat.getCurrencyInstance()
-                        .parse(String.valueOf(snap.child("price").getValue()))
-                        .toString());
-            } catch (ParseException e){
-                e.printStackTrace();
-            }
-
-            quantity = Integer.valueOf(snap.child("quantity").getValue().toString());
-
-//            items.add(new ShoppingItem(
-//                    snap.child("productID").getValue().toString(),
-//                    snap.child("title").getValue().toString(),
-//                    snap.child("type").getValue().toString(),
-//                    snap.child("description").getValue().toString(),
-//                    itemPrice,
-//                    quantity
-//            ));
-
-            totalAmount += quantity*itemPrice;
-        }
-
-        ListView view = (ListView) findViewById(R.id.shoppingCartList);
-        // Now the Cart gets updated whenever the data changes in the server
-        view.setAdapter(new ShoppingCartAdapter(getApplicationContext(), items));
-
-        priceView.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
     }
 
-//    private void clearCart() {
-//
-//        if (!isCartEmpty) {
-////            DatabaseReference myRefClear = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-////            myRefClear.child(user.getUid()).push();
-//
-//            // As firebase does not accept keys with empty values, I'm putting a dummy item with empty Strings and -1 as ints
-//            // Quantity of items in cart is not realtime database quantity but the quantity the user wants
-//            ArrayList<ShoppingItem> cart = new ArrayList<>();
-//            cart.add(new ShoppingItem("", "", "", "", -1, -1));
-//            Map<String, Object> cartItems = new HashMap<>();
-//            cartItems.put("cartItems", cart);
-//
-//            // Adding a isCartEmpty State Variable for cart window display
-//
-//            Map<String, Object> cartState = new HashMap<>();
-//            cartState.put("isCartEmpty", Boolean.TRUE);
-//
-//            // Updating the database for the user
-//            myRefClear.updateChildren(cartItems);
-//            myRefClear.updateChildren(cartState);
-//
-//            isCartEmpty = true;
-//        }
-//    }
     private void showAlertDialog(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShoppingCartWindow.this);
         alertDialog.setTitle("For last Step");
@@ -197,7 +114,7 @@ public class ShoppingCartWindow extends AppCompatActivity {
                 Request req = new Request(Current.currentUser.getCell(),
                         Current.currentUser.getfirstname(),
                         Current.currentUser.getlastname(), edtAddress.getText().toString(),
-                        priceView.getText().toString(),items);
+                        priceView.getText().toString(),shoppingCartList);
                 // sending them to server
 
                 //Go to payment Activity

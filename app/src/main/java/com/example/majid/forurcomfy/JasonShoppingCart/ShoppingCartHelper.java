@@ -1,6 +1,7 @@
 package com.example.majid.forurcomfy.JasonShoppingCart;
 
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,15 +21,15 @@ public class ShoppingCartHelper {
     public static List<Product> getCatalog(Resources res){
         if(catalog == null) {
             catalog = new Vector<Product>();
-            catalog.add(new Product("artichokes", res
+            catalog.add(new Product("Artichokes", res
                     .getDrawable(R.drawable.artichokes),
-                    "artichokes", 29.99));
-            catalog.add(new Product("Switch", res
+                    "artichokes things", 29.99));
+            catalog.add(new Product("Att0", res
                     .getDrawable(R.drawable.att0),
                     "Some Food", 24.99));
-            catalog.add(new Product("Watchmen", res
+            catalog.add(new Product("Berry Tart", res
                     .getDrawable(R.drawable.berry_tart),
-                    "Berry tart", 14.99));
+                    "Berry Tart", 14.99));
         }
 
         return catalog;

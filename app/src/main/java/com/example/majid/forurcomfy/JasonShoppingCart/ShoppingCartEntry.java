@@ -2,6 +2,8 @@ package com.example.majid.forurcomfy.JasonShoppingCart;
 
 public class ShoppingCartEntry {
 
+
+    //allow to add multiple products to cart
     private Product mProduct;
     private int mQuantity;
 
