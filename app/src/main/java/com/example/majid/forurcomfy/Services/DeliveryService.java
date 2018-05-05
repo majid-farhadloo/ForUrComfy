@@ -6,10 +6,7 @@ import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-
-import com.example.majid.forurcomfy.Data.model.DataItem;
-
-import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.ShoppingCart.ShoppingItem;
 import com.example.majid.forurcomfy.Utlis.HttpHelper;
 import com.google.gson.Gson;
 
@@ -19,14 +16,14 @@ import java.io.IOException;
  * Created by farha on 4/22/2018.
  */
 
-public class MyService extends IntentService {
+public class DeliveryService extends IntentService {
 
     public static final String TAG = "MyService";
     public static final String MY_SERVICE_MESSAGE = "MyServiceMessage";
     public static final String MY_SERVICE_PAYLOAD = "MyServicePayload";
 
 
-    public MyService() {
+    public DeliveryService() {
         super("MyService");
     }
 
@@ -42,7 +39,7 @@ public class MyService extends IntentService {
             return;
         }
         Gson gson  = new Gson();
-        FoodMenu[] dataItems = gson.fromJson(response, FoodMenu[].class);
+        ShoppingItem[] dataItems = gson.fromJson(response, ShoppingItem[].class);
         Log.i("DATAPASS", "data passed :" + dataItems);
         Intent intentMessage  = new Intent (MY_SERVICE_MESSAGE);
         intentMessage.putExtra(MY_SERVICE_PAYLOAD,dataItems);

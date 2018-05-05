@@ -1,4 +1,4 @@
-package com.example.majid.forurcomfy;
+package com.example.majid.forurcomfy.JasonShoppingCart;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.majid.forurcomfy.DeliveryRequestActivity;
+import com.example.majid.forurcomfy.R;
 
 import java.util.List;
 
@@ -14,7 +18,7 @@ public class ShoppingCartActivity extends Activity {
 
     private List<Product> mCartList;
     private ProductAdapter mProductAdapter;
-
+    private TextView tvName, tvPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

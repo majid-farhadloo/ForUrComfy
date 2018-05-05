@@ -32,6 +32,7 @@
 package com.example.majid.forurcomfy;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,10 +44,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.Sample.SampleDataProvider;
+import com.example.majid.forurcomfy.ShoppingCart.ShoppingCartWindow;
+import com.example.majid.forurcomfy.Utlis.ShoppingDatabaseHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -54,6 +59,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView tvName, tvDescription, tvPrice;
     private ImageView itemImage;
+    List<FoodMenu> dataItemList = SampleDataProvider.dataItemList;
+    ShoppingDatabaseHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,9 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         FoodMenu item = getIntent().getExtras().getParcelable(DataItemAdapter.ITEM_KEY);
+        mDatabaseHelper = new ShoppingDatabaseHelper(this);
+
+
         if (item != null) {
             Toast.makeText(this, "Received item " + item.getItemId(),
                     Toast.LENGTH_SHORT);
@@ -74,7 +84,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent shoppingIntent = new Intent(DetailActivity.
-                        this,ShoppingCartActivity.class);
+                        this,ShoppingCartWindow.class);
                 startActivity(shoppingIntent);
                 Snackbar.make(view, "Go to Cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -85,12 +95,41 @@ public class DetailActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String foodname = tvName.getText().toString();
+                String price = tvPrice.getText().toString().substring(1);
+                String quantityStr = "1";
+                String totalpriceStr = price;
+                if (mDatabaseHelper.viewData(foodname) != null) {
 
-                Snackbar.make(view, "Added to Your Shopping Cart", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                    Cursor cursor = mDatabaseHelper.viewData(foodname);
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        String registered_quantity = cursor.getString(cursor.getColumnIndex(ShoppingDatabaseHelper.COL3));
+                        String registered_totalprice = cursor.getString(cursor.getColumnIndex(ShoppingDatabaseHelper.COL4));
+                        if (!cursor.isClosed())
+                        {
+                            cursor.close();
+                        }
+
+                        int quantity = Integer.parseInt(registered_quantity) + 1;
+                        quantityStr = String.valueOf(quantity);
+                        float totalprice = Float.parseFloat(price) + Float.parseFloat(registered_totalprice);
+                        totalpriceStr = String.valueOf(totalprice);
+                        UpdateData(foodname, price, quantityStr, totalpriceStr, view);
+
+                    } else {
+                        if (!cursor.isClosed())
+                        {
+                            cursor.close();
+                        }
+                        AddData(foodname, price, quantityStr, totalpriceStr, view);
+                    }
+                } else {
+                    AddData(foodname, price, quantityStr, totalpriceStr, view);
+                }
+
             }
         });
-
 
         tvName = (TextView) findViewById(R.id.tvItemName);
         tvPrice = (TextView) findViewById(R.id.tvPrice);
@@ -119,6 +158,29 @@ public class DetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+
+    }
+
+    public void AddData(String foodname, String price, String quantity, String totalprice, View view) {
+        boolean insertData = mDatabaseHelper.addData(foodname, price, quantity, totalprice);
+        if(insertData) {
+            Snackbar.make(view, "Added to Your Shopping Cart", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
+            Snackbar.make(view, "Error", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+    }
+
+    public void UpdateData(String foodname, String price, String quantity, String totalprice, View view) {
+        boolean insertData = mDatabaseHelper.updateData(foodname, price, quantity, totalprice);
+        if(insertData) {
+            Snackbar.make(view, "Added to Your Shopping Cart", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        } else {
+            Snackbar.make(view, "Error", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 }

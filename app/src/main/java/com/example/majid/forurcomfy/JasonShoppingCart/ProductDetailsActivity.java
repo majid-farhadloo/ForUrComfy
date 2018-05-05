@@ -1,4 +1,5 @@
-package com.example.majid.forurcomfy;
+package com.example.majid.forurcomfy.JasonShoppingCart;
+
 
 import java.util.List;
 
@@ -11,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.majid.forurcomfy.JasonShoppingCart.Product;
+import com.example.majid.forurcomfy.JasonShoppingCart.ShoppingCartHelper;
+import com.example.majid.forurcomfy.R;
 
 public class ProductDetailsActivity extends Activity {
 

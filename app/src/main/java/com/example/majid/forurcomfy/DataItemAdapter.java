@@ -68,7 +68,7 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
                 Intent intent = new Intent(mContext,DetailActivity.class);
                 intent.putExtra(ITEM_ID_KEY,itemId);
                 intent.putExtra(ITEM_KEY,item);
-                mContext.startActivities(new Intent[]{intent});
+                mContext.startActivity(intent);
             }
         });
         holder.mView.setOnLongClickListener(new View.OnLongClickListener(){
