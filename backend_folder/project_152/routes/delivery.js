@@ -29,9 +29,13 @@ router.get('/request', function(req, res) {
 
 router.post('/claim',function(req,res){
   var orderid= req.body._id;
-  res.status(200);
+  order.update({_id: orderid }, { $set: {completed:true}}).exec(function(err,result)
+  {
+      return res.status(200).json(result);
+    });
+  });
+  //Tank.update({ _id: id }, { $set: { size: 'large' }}, callback);
   //this is to update completed to
-})
 
 router.get('/done',function(req,res){
   order.findOne().update({completed:true})
