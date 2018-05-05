@@ -25,12 +25,16 @@ router.post('/', function(req, res) {
     var foodName = req.body.foodName;
     var price = req.body.price;
     var quantity = req.body.quantity;
+    var name = req.body.firstname;
+    var location = req.body.location;
     newOrder.foodName = foodName;
     newOrder.price = price;
     newOrder.quantity = quantity;
-    newOrder.currentUser = req.session.user['firstname'];
+    newOrder.currentUser = name;
     newOrder.time = Date.now();
     newOrder.completed = false;
+    newOrder.location = location;
+    newOrder.cell = req.body.cell;
     newOrder.save(function(err,savedOrder){
         if(!req.session.user)
         {
@@ -45,6 +49,7 @@ router.post('/', function(req, res) {
                           "Order ID":savedOrder['_id'],
                           "Price":savedOrder['price'],
                           "Quantity":savedOrder['quantity'],
+                          "Deliver to":savedOrder['location'],
                           "Total Price": savedOrder['price']*savedOrder['quantity']
                         });
     });

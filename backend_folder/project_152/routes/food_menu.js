@@ -14,10 +14,10 @@ db.on("error", function (err) {
 });
 
 router.get('/', function(req, res) {
-    if(!req.session.user)
-    return res.json({"result":false,
-                      "message":"User not logged in"
-                    });
+    // if(!req.session.user)
+    // return res.json({"result":false,
+    //                   "message":"User not logged in"
+    //                 });
     food_menu.find(function(err, result) {
 	    if(err) {
 	        next(err);

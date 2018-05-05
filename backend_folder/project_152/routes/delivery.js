@@ -17,20 +17,30 @@ db.on("error", function (err) {
 // var query = order.find({});
 // console.log(query['foodName']);
 
-router.get('/', function(req, res) {
+router.get('/request', function(req, res) {
     // var returnorder = order.find({completed:false}, function(err, result) {
     // if (err) throw err;
-    order.findOne({completed:false}).sort('time').exec(function(err,result)
+    order.findOne({completed:false}).sort({_id: 1}).exec(function(err,result)
   {
     if(err) throw err;
-    res.json(result);
-    // res.send('respond with a resource');
-    // var user  = req.session.user;
-    // result.sort('time',1);
-    // res.send(result);
+    res.status(200).json(result);
     });
-
-
   });
+
+  router.get('/all', function(req, res) {
+      // var returnorder = order.find({completed:false}, function(err, result) {
+      // if (err) throw err;
+      order.find({completed:false}).sort('time').exec(function(err,result)
+    {
+      if(err) throw err;
+      res.status.(200).json(result);
+      // res.send('respond with a resource');
+      // var user  = req.session.user;
+      // result.sort('time',1);
+      // res.send(result);
+      });
+
+
+    });
 
 module.exports = router;

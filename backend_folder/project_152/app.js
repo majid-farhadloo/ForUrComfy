@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,7 +11,7 @@ var users = require('./routes/users');
 var ordering = require('./routes/ordering');
 var delivery = require('./routes/delivery');
 var food_menu = require('./routes/food_menu');
-var app = express();
+var restaurant_item = require('./routes/restaurant_item');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +29,7 @@ app.use('/delivery',delivery);
 app.use('/', index);
 app.use('/order', ordering);
 app.use('/food_menu', food_menu);
+app.use('/restaurant_item', restaurant_item);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
