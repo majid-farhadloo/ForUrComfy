@@ -6,6 +6,10 @@ import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+<<<<<<< HEAD
+=======
+import com.example.majid.forurcomfy.Data.model.DataItem;
+>>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
 import com.example.majid.forurcomfy.Data.model.FoodMenu;
 import com.example.majid.forurcomfy.Utlis.HttpHelper;
 import com.google.gson.Gson;

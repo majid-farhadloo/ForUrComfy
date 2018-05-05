@@ -32,17 +32,20 @@
 package com.example.majid.forurcomfy;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.Data.model.SqliteHelper;
 import com.example.majid.forurcomfy.Sample.SampleDataProvider;
 import com.example.majid.forurcomfy.ShoppingCart.ShoppingCartWindow;
 
@@ -52,19 +55,23 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import static java.sql.Types.NULL;
+
 @SuppressWarnings("FieldCanBeLocal")
 public class DetailActivity extends AppCompatActivity {
 
     private TextView tvName, tvDescription, tvPrice;
     private ImageView itemImage;
     List<FoodMenu> dataItemList = SampleDataProvider.dataItemList;
+    private FoodMenu item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        FoodMenu item = getIntent().getExtras().getParcelable(DataItemAdapter.ITEM_KEY);
+        final SqliteHelper dbhelper = new SqliteHelper(getApplicationContext(), "ShoppingCart.db", null, 1);
+//        FoodMenu item = getIntent().getExtras().getParcelable(DataItemAdapter.ITEM_KEY);
+        item = getIntent().getExtras().getParcelable(DataItemAdapter.ITEM_KEY);
         if (item != null) {
             Toast.makeText(this, "Received item " + item.getItemId(),
                     Toast.LENGTH_SHORT);
@@ -73,10 +80,14 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Didn't receive any data", Toast.LENGTH_SHORT).show();
         }
 
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("Shopping cart", "clicked: " + item);
+
                 Intent shoppingIntent = new Intent(DetailActivity.
                         this,ShoppingCartWindow.class);
                 startActivity(shoppingIntent);
@@ -89,6 +100,8 @@ public class DetailActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                dbhelper.insert(NULL,item.getItemId(),1, item.getItemName(), item.getCategory(), item.getDescription(), item.getPrice());
 
                 Snackbar.make(view, "Added to Your Shopping Cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

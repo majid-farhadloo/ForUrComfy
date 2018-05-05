@@ -1,26 +1,34 @@
 package com.example.majid.forurcomfy.ShoppingCart;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.example.majid.forurcomfy.Common.Current;
+import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.Data.model.SqliteHelper;
 import com.example.majid.forurcomfy.PaymentActivity;
 import com.example.majid.forurcomfy.R;
 import com.example.majid.forurcomfy.model.Request;
-import com.google.firebase.database.DataSnapshot;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCartWindow extends AppCompatActivity {
 
@@ -29,56 +37,36 @@ public class ShoppingCartWindow extends AppCompatActivity {
 //    DatabaseReference myRef;
     Boolean isCartEmpty = true;
     TextView priceView;
+    SqliteHelper dbhelper;
 //    private FirebaseAuth mAuth;
 //    private FirebaseAuth.AuthStateListener mAuthListener;
 //    private FirebaseUser user;
-
     int totalAmount = 0;
     ArrayList<ShoppingItem> items;// =
+    ListView cartList;
+//    List<FoodMenu> mItemList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart_window);
+        dbhelper = new SqliteHelper(getApplicationContext(), "ShoppingCart.db", null, 1);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM SHOPPING_CART", null);
+        startManagingCursor(cursor);
+
+        MyListAdapter listAdapter = null;
+        listAdapter = new MyListAdapter(this, cursor, 0);
 
         priceView = (TextView) findViewById(R.id.totalPriceCheckout);
+        cartList = (ListView) findViewById(R.id.shoppingCartList);
+        cartList.setAdapter(listAdapter);
 
-        //mAuth = FirebaseAuth.getInstance();
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                user = firebaseAuth.getCurrentUser();
-//                if (user != null) {
-//                    // User is signed in
-//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-//                    myRef = database.getReference("users/" + user.getUid());
-//
-//                    // adding value event listener for myRef
-//                    myRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            if (dataSnapshot.getKey().equals(user.getUid())) {
-//                                Log.e("CART", dataSnapshot.child("isCartEmpty").getValue().toString());
-//                                isCartEmpty = (Boolean) dataSnapshot.child("isCartEmpty").getValue();
-//                                if (isCartEmpty) {
-//                                    priceView.setText(NumberFormat.getCurrencyInstance().format(0));
-//                                } else {
-//                                    setUpShoppingCart(dataSnapshot.child("cartItems"));
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError error) {
-//                            Log.w(TAG, "Failed to read value.", error.toException());
-//                        }
-//                    });
-//
-//                } else {
-//                    Log.d(TAG, "onAuthStateChanged:signed_out");
-//                }
-//            }
-//        };
+        int total = dbhelper.getTotalPrice();
+
+        priceView.setText(Integer.toString(total));
 
         (findViewById(R.id.returnToPrevPage)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,83 +88,52 @@ public class ShoppingCartWindow extends AppCompatActivity {
         (findViewById(R.id.clearCart)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dbhelper.clear();
+                MyListAdapter listAdapter = null;
+                cartList.setAdapter(listAdapter);
+                priceView.setText("0");
                 Snackbar.make(findViewById(R.id.shoppingCartWindowLayout),
                         "Cleared!",
                         Snackbar.LENGTH_SHORT).show();
                 //clearCart();
-                finish();
             }
         });
-
-    }
-    private void setUpShoppingCart(DataSnapshot dataSnapshot) {
-
-        totalAmount = 0;
-
-        if (items != null){
-            items.clear();
-        } else {
-            items = new ArrayList<>();
-        }
-
-        for (DataSnapshot snap : dataSnapshot.getChildren()){
-
-            int itemPrice = -1, quantity = 0;
-
-            try{
-                itemPrice = Integer.valueOf(NumberFormat.getCurrencyInstance()
-                        .parse(String.valueOf(snap.child("price").getValue()))
-                        .toString());
-            } catch (ParseException e){
-                e.printStackTrace();
-            }
-
-            quantity = Integer.valueOf(snap.child("quantity").getValue().toString());
-
-//            items.add(new ShoppingItem(
-//                    snap.child("productID").getValue().toString(),
-//                    snap.child("title").getValue().toString(),
-//                    snap.child("type").getValue().toString(),
-//                    snap.child("description").getValue().toString(),
-//                    itemPrice,
-//                    quantity
-//            ));
-
-            totalAmount += quantity*itemPrice;
-        }
-
-        ListView view = (ListView) findViewById(R.id.shoppingCartList);
-        // Now the Cart gets updated whenever the data changes in the server
-        view.setAdapter(new ShoppingCartAdapter(getApplicationContext(), items));
-
-        priceView.setText(NumberFormat.getCurrencyInstance().format(totalAmount));
     }
 
-//    private void clearCart() {
-//
-//        if (!isCartEmpty) {
-////            DatabaseReference myRefClear = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-////            myRefClear.child(user.getUid()).push();
-//
-//            // As firebase does not accept keys with empty values, I'm putting a dummy item with empty Strings and -1 as ints
-//            // Quantity of items in cart is not realtime database quantity but the quantity the user wants
-//            ArrayList<ShoppingItem> cart = new ArrayList<>();
-//            cart.add(new ShoppingItem("", "", "", "", -1, -1));
-//            Map<String, Object> cartItems = new HashMap<>();
-//            cartItems.put("cartItems", cart);
-//
-//            // Adding a isCartEmpty State Variable for cart window display
-//
-//            Map<String, Object> cartState = new HashMap<>();
-//            cartState.put("isCartEmpty", Boolean.TRUE);
-//
-//            // Updating the database for the user
-//            myRefClear.updateChildren(cartItems);
-//            myRefClear.updateChildren(cartState);
-//
-//            isCartEmpty = true;
-//        }
-//    }
+    class MyItem {
+        MyItem(int itemName) {
+            itemName = itemName;
+        }
+        int itemName;
+    }
+
+    class MyListAdapter extends CursorAdapter {
+        private LayoutInflater cursorInflater;
+
+        public MyListAdapter(Context context, Cursor c, int flags) {
+            super(context, c, flags);
+            cursorInflater = (LayoutInflater) context.getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE
+            );
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            return cursorInflater.inflate(R.layout.cart_list_view, parent, false);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            TextView textView = (TextView) view.findViewById(R.id.text1);
+            TextView et2 = (TextView) view.findViewById(R.id.text2);
+
+            String name = cursor.getString(cursor.getColumnIndex("itemName"));
+            int quantity = cursor.getInt(cursor.getColumnIndex("quantity"));
+
+            textView.setText(name);
+            et2.setText(Integer.toString(quantity));
+        }
+    }
     private void showAlertDialog(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShoppingCartWindow.this);
         alertDialog.setTitle("For last Step");

@@ -44,12 +44,15 @@
         <activity android:name=".JasonShoppingCart.CatalogActivity" />
         <activity android:name=".JasonShoppingCart.ProductDetailsActivity" />
         <activity android:name=".JasonShoppingCart.ShoppingCartActivity" />
+<<<<<<< HEAD
 
         <!--<activity android:name=".PaymentActivity"-->
             <!--android:parentActivityName=".DeliveryRequestActivity"/>-->
         <!--<activity android:name=".CatalogActivity" />-->
         <!--<activity android:name=".ProductDetailsActivity" />-->
         <!--<activity android:name=".ShoppingCartActivity" />-->
+=======
+>>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
@@ -58,11 +61,14 @@
         <activity
             android:name=".DeliveryRequestActivity"
             android:parentActivityName=".JasonShoppingCart.ShoppingCartActivity" />
+<<<<<<< HEAD
         <activity android:name=".DeliveryRequestActivity"
             android:parentActivityName=".JasonShoppingCart.ShoppingCartActivity"
             tools:ignore="DuplicateActivity">
         </activity>
 
+=======
+>>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
         <activity
             android:name=".ReturnActivity"
             android:parentActivityName=".ReturnActivity" />
@@ -71,10 +77,16 @@
             android:name=".Services.MyService"
             android:enabled="true"
             android:exported="false" />
+<<<<<<< HEAD
 
         <activity android:name=".ShoppingCart.ShoppingCartWindow" />
         <activity android:name=".RequestDelivery"
             android:parentActivityName=".DeliveryRequestActivity"/>
+=======
+        <activity android:name=".ShoppingCart.ShoppingCartWindow" />
+        <activity android:name=".RequestDelivery"></activity>
+
+>>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
     </application>
 
 </manifest>
