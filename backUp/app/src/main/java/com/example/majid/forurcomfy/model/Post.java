@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Post {
-    @SerializedName("result")
-    private String result;
-    @SerializedName("message")
-    private String message;
+//    @SerializedName("result")
+//    private String result;
+//    @SerializedName("message")
+//    private String message;
     @SerializedName("firstname")
     @Expose
     private String firstname;
@@ -32,21 +32,20 @@ public class Post {
     @Override
     public String toString() {
         return "User{" +
-                "result='" + result + '\'' +
                 "email='" + email + '\'' +
-                ", message='" + message + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", cell='" + cell + '\'';
-    }
+                ", cell='" + cell + '\'' + "}";
 
-    public String getResult() {
-        return result;
     }
-
-    public String getMessage() {
-        return message;
-    }
+//
+//    public String getResult() {
+//        return result;
+//    }
+//
+//    public String getMessage() {
+//        return message;
+//    }
 
     public String getfirstname() {
         return firstname;
