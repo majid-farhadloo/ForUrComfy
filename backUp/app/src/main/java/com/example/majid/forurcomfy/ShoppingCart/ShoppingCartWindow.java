@@ -47,7 +47,14 @@ public class ShoppingCartWindow extends AppCompatActivity {
     ArrayList<ShoppingItem> items;
     ListView cartList;
     String msg;
+    Cursor cursor;
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        cursor.requery();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +63,7 @@ public class ShoppingCartWindow extends AppCompatActivity {
         dbhelper = new SqliteHelper(getApplicationContext(), "ShoppingCart.db", null, 1);
         SQLiteDatabase db = dbhelper.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM SHOPPING_CART", null);
+        cursor = db.rawQuery("SELECT * FROM SHOPPING_CART", null);
         startManagingCursor(cursor);
 
         MyListAdapter listAdapter = null;
@@ -96,7 +103,7 @@ public class ShoppingCartWindow extends AppCompatActivity {
         (findViewById(R.id.checkOut)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                stopManagingCursor(cursor);
                 // Create new Request
                 showAlertDialog();
 
@@ -172,6 +179,7 @@ public class ShoppingCartWindow extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 //Creat new Request
+                Log.d("shoppingcart", "current user : " + Current.currentUser);
                 Request req = new Request(Current.currentUser.getCell(),
                         Current.currentUser.getfirstname(),
                         Current.currentUser.getlastname(), edtAddress.getText().toString(),

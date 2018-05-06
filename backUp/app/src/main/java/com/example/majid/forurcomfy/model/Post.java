@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Post {
+    @SerializedName("result")
+    private String result;
+    @SerializedName("message")
+    private String message;
     @SerializedName("firstname")
     @Expose
     private String firstname;
@@ -20,12 +24,6 @@ public class Post {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("password")
-    @Expose
-    private String password;
-    @SerializedName("reTypePassword")
-    @Expose
-    private String reTypePassword;
 
     public Post(String email) {
         this.email = email;
@@ -34,59 +32,39 @@ public class Post {
     @Override
     public String toString() {
         return "User{" +
-                "firstname='" + firstname + '\'' +
+                "result='" + result + '\'' +
+                "email='" + email + '\'' +
+                ", message='" + message + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", reTypePassword='" + reTypePassword + '\'' +
-                '}';
+                ", cell='" + cell + '\'';
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public String getfirstname() {
         return firstname;
     }
 
-    public void setfirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
     public String getlastname() {
         return lastname;
-    }
-
-    public void setlastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getReTypePassword() {
-        return reTypePassword;
-    }
-
-    public void setReTypePassword(String reTypePassword) {
-        this.reTypePassword = reTypePassword;
-    }
-
-    public Post(String fname, String lname, String email, String password) {
+    public Post(String fname, String lname, String email, String cell) {
         this.firstname = fname;
         this.lastname = lname;
         this.email = email;
-        this.password = password;
+        this.cell = cell;
        // this.reTypePassword = reTypepassword;
     }
 
@@ -94,23 +72,11 @@ public class Post {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getCell() {
         return cell;
-    }
-
-    public void setCell(String cell) {
-        this.cell = cell;
     }
 }

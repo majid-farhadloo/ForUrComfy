@@ -16,6 +16,8 @@ import com.example.majid.forurcomfy.Remote.APIService;
 import com.example.majid.forurcomfy.Remote.ApiUtlis;
 import com.example.majid.forurcomfy.model.Post;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +25,6 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     private APIService mAPIService;
     private TextView mResponseTv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,34 +68,26 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
             private void sendPost(final String email, String password) {
-                mAPIService.savePost(email, password).enqueue(new Callback<Post>() {
-                    public static final String TAG = "tag";
 
+                Call<Post> apiCall = mAPIService.savePost(email, password);
+                apiCall.enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
-
-                        if (response.isSuccessful()) {
-//                            showResponse(response.body().toString());
-//                            Log.i(TAG, "post submitted to API." + response.body().toString());
+                        if (response.isSuccessful()){
+                            Log.d("user info", "post submitted to API : " + response.body().toString());
                             Intent LoginIntent = new Intent(LoginActivity.
                                     this, Home.class);
-                            Current.currentUser = new Post(email);
+//                            Current.currentUser = new Post(email);
+                            Current.currentUser = new Post(response.body().getFirstname(),response.body().getLastname(), response.body().getEmail(), response.body().getCell());
                             LoginIntent.putExtra("email", email);
                             LoginActivity.this.startActivity(LoginIntent);
                             finish();
                         }
                     }
 
-                    public void showResponse(String response) {
-                        if (mResponseTv.getVisibility() == View.GONE) {
-                            mResponseTv.setVisibility(View.VISIBLE);
-                        }
-                        mResponseTv.setText(response);
-                    }
-
                     @Override
                     public void onFailure(Call<Post> call, Throwable t) {
-                        Log.e(TAG, "Unable to submit post to API.");
+                        Log.i("user info", "failure due to " + t.toString());
                     }
                 });
             }
