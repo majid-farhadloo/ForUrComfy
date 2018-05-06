@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.majid.forurcomfy">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -38,6 +37,7 @@
         </activity>
         <!-- <activity android:name=".Extras.VeggiMenuActivity" /> -->
         <activity android:name=".OrderActivity" />
+<<<<<<< HEAD
         <![CDATA[
         />
         ]]><!-- <activity android:name=".JasonShoppingCart.CatalogActivity" /> -->
@@ -49,14 +49,43 @@
         <!-- <activity android:name=".ProductDetailsActivity" /> -->
         <!-- <activity android:name=".ShoppingCartActivity" /> -->
 
+=======
+
+        <activity
+            android:name=".PaymentActivity"
+            android:parentActivityName=".DeliveryRequestActivity" />
+        <activity android:name=".JasonShoppingCart.CatalogActivity" />
+        <activity android:name=".JasonShoppingCart.ProductDetailsActivity" />
+        <activity android:name=".JasonShoppingCart.ShoppingCartActivity" />
+
+        <!--<activity android:name=".PaymentActivity"-->
+            <!--android:parentActivityName=".DeliveryRequestActivity"/>-->
+        <!--<activity android:name=".CatalogActivity" />-->
+        <!--<activity android:name=".ProductDetailsActivity" />-->
+        <!--<activity android:name=".ShoppingCartActivity" />-->
+
+>>>>>>> 8cdfa5ed5338a7c46bb506b0bcc72a4d995afd50
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
         <activity android:name=".DeliverGuyActivity" />
         <activity
             android:name=".YesNoDeliveryActivity"
             android:parentActivityName=".ShoppingCart.ShoppingCartWindow" />
+=======
+        <activity android:name=".DeliverActivity" />
+
+        <activity
+            android:name=".DeliveryRequestActivity"
+            android:parentActivityName=".JasonShoppingCart.ShoppingCartActivity" />
+
+        <!--<activity android:name=".DeliveryRequestActivity"-->
+            <!--android:parentActivityName=".ShoppingCartActivity">-->
+        <!--</activity>-->
+
+>>>>>>> 8cdfa5ed5338a7c46bb506b0bcc72a4d995afd50
         <activity
             android:name=".ReturnActivity"
             android:parentActivityName=".Home" />
@@ -66,6 +95,7 @@
             android:enabled="true"
             android:exported="false" />
 
+<<<<<<< HEAD
         <activity android:name=".ShoppingCart.ShoppingCartWindow" />
         <activity
             android:name=".RequestDeliveryItem"
@@ -76,6 +106,13 @@
         <activity android:name=".CheckoutActivity">
             android:parentActivityName=".Home"
         </activity>
+=======
+
+        <activity android:name=".ShoppingCart.ShoppingCartWindow" />
+        <activity android:name=".RequestDelivery"></activity>
+
+
+>>>>>>> 8cdfa5ed5338a7c46bb506b0bcc72a4d995afd50
     </application>
 
 </manifest>

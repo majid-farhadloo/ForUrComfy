@@ -27,17 +27,27 @@ router.get('/request', function(req, res) {
     });
   });
 
+router.post('/claim',function(req,res){
+  var orderid= req.body._id;
+  order.update({_id: orderid }, { $set: {completed:true}}).exec(function(err,result)
+  {
+      return res.status(200).json(result);
+    });
+  });
+  //Tank.update({ _id: id }, { $set: { size: 'large' }}, callback);
+  //this is to update completed to
+
+router.get('/done',function(req,res){
+  order.findOne().update({completed:true})
+})
+
   router.get('/all', function(req, res) {
       // var returnorder = order.find({completed:false}, function(err, result) {
       // if (err) throw err;
       order.find({completed:false}).sort('time').exec(function(err,result)
     {
       if(err) throw err;
-      res.status.(200).json(result);
-      // res.send('respond with a resource');
-      // var user  = req.session.user;
-      // result.sort('time',1);
-      // res.send(result);
+      res.status(200).json(result);
       });
 
 

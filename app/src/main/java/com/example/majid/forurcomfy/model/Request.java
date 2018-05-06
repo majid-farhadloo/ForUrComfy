@@ -1,6 +1,11 @@
 package com.example.majid.forurcomfy.model;
 
+<<<<<<< HEAD
 import com.example.majid.forurcomfy.Data.model.ShoppingItem;
+=======
+import com.example.majid.forurcomfy.ShoppingCart.Shopping;
+import com.example.majid.forurcomfy.ShoppingCart.ShoppingItem;
+>>>>>>> 8cdfa5ed5338a7c46bb506b0bcc72a4d995afd50
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +19,12 @@ public class Request {
     private String address;
     private String name;
     private String total;
-    private List<ShoppingItem> foods;
+    private List<Shopping> foods;
 
-    public Request(String cell, String getfirstname, String getlastname, String s, String toString, ArrayList<ShoppingItem> items) {
+    public Request(String cell, String getfirstname, String getlastname, String s, String toString, ArrayList<Shopping> items) {
     }
 
-    public Request(String phone, String address, String name, String total, List<ShoppingItem> foods) {
+    public Request(String phone, String address, String name, String total, List<Shopping> foods) {
         this.phone = phone;
         this.address = address;
         this.name = name;
@@ -59,11 +64,11 @@ public class Request {
         this.total = total;
     }
 
-    public List<ShoppingItem> getFoods() {
+    public List<Shopping> getFoods() {
         return foods;
     }
 
-    public void setFoods(List<ShoppingItem> foods) {
+    public void setFoods(List<Shopping> foods) {
         this.foods = foods;
     }
 
