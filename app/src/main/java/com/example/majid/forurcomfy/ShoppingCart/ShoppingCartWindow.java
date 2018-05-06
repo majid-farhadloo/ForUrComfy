@@ -9,42 +9,44 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.majid.forurcomfy.CheckoutActivity;
 import com.example.majid.forurcomfy.Common.Current;
-import com.example.majid.forurcomfy.Data.model.FoodMenu;
+import com.example.majid.forurcomfy.Data.model.OrderProcess;
+import com.example.majid.forurcomfy.Data.model.ShoppingItem;
 import com.example.majid.forurcomfy.Data.model.SqliteHelper;
-import com.example.majid.forurcomfy.PaymentActivity;
 import com.example.majid.forurcomfy.R;
+import com.example.majid.forurcomfy.Remote.APIService;
+import com.example.majid.forurcomfy.Remote.ApiUtlis;
 import com.example.majid.forurcomfy.model.Request;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ShoppingCartWindow extends AppCompatActivity {
 
     private final String TAG = ShoppingCartWindow.class.getSimpleName();
-    //    FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    DatabaseReference myRef;
+
     Boolean isCartEmpty = true;
     TextView priceView;
     SqliteHelper dbhelper;
-//    private FirebaseAuth mAuth;
-//    private FirebaseAuth.AuthStateListener mAuthListener;
-//    private FirebaseUser user;
     int totalAmount = 0;
-    ArrayList<ShoppingItem> items;// =
+    ArrayList<ShoppingItem> items;
     ListView cartList;
-//    List<FoodMenu> mItemList;
+    String msg;
 
 
     @Override
@@ -65,6 +67,22 @@ public class ShoppingCartWindow extends AppCompatActivity {
         cartList.setAdapter(listAdapter);
 
         int total = dbhelper.getTotalPrice();
+
+        // Create the list
+//        ListView listViewCatalog = (ListView) findViewById(R.id.ListViewCatalog);
+//        listViewCatalog.setAdapter(new ShoppingCartAdapter(items, getLayoutInflater(), false));
+//
+//        listViewCatalog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position,
+//                                    long id) {
+//                Intent productDetailsIntent = new Intent(getBaseContext(),ProductDetailsActivity.class);
+//                productDetailsIntent.putExtra(ShoppingCartHelper.PRODUCT_INDEX, position);
+//                startActivity(productDetailsIntent);
+//            }
+//        });
+
 
         priceView.setText(Integer.toString(total));
 
@@ -104,6 +122,7 @@ public class ShoppingCartWindow extends AppCompatActivity {
         MyItem(int itemName) {
             itemName = itemName;
         }
+
         int itemName;
     }
 
@@ -134,15 +153,17 @@ public class ShoppingCartWindow extends AppCompatActivity {
             et2.setText(Integer.toString(quantity));
         }
     }
-    private void showAlertDialog(){
+
+    private void showAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShoppingCartWindow.this);
         alertDialog.setTitle("For last Step");
-        alertDialog.setMessage("Please Enter Your address");
+        alertDialog.setMessage("Please Enter Your address if you would like your food to be " +
+                "delivered");
 
         final EditText edtAddress = new EditText(ShoppingCartWindow.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.MATCH_PARENT
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
         );
         edtAddress.setLayoutParams(lp);
         alertDialog.setView(edtAddress);
@@ -154,11 +175,37 @@ public class ShoppingCartWindow extends AppCompatActivity {
                 Request req = new Request(Current.currentUser.getCell(),
                         Current.currentUser.getfirstname(),
                         Current.currentUser.getlastname(), edtAddress.getText().toString(),
-                        priceView.getText().toString(),items);
+                        priceView.getText().toString(), items);
                 // sending them to server
 
+
+                APIService mAPIService = ApiUtlis.getAPIService();
+
+
+                mAPIService.request(items, Current.currentUser.getCell(),
+                        edtAddress.getText().toString(), Current.currentUser).enqueue(new Callback<OrderProcess>() {
+                    @Override
+                    public void onResponse(Call<OrderProcess> call, Response<OrderProcess> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("+++", "Success");
+                            msg = response.body().getMessage();
+                            Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+
+//                    mRecyclerView.set(mItemAdapter);
+                        } else {
+                            Log.d("+++", "Fail");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrderProcess> call, Throwable t) {
+                        Log.d("+++", "Fail");
+                    }
+                });
+                Intent intent =  new Intent(getApplicationContext(), CheckoutActivity.class);
+                intent.putExtra(CheckoutActivity.PRICE, priceView.getText());
                 //Go to payment Activity
-                startActivity(new Intent(getApplicationContext(), PaymentActivity.class));
+                startActivity(intent);
             }
         });
 
@@ -166,12 +213,17 @@ public class ShoppingCartWindow extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                startActivity(new Intent(getApplicationContext(), PaymentActivity.class));
+                //startActivity(new Intent(getApplicationContext(), CheckoutActivity.class));
+                Intent intent =  new Intent(getApplicationContext(), CheckoutActivity.class);
+                intent.putExtra(CheckoutActivity.PRICE, priceView.getText());
+                //Go to payment Activity
+                startActivity(intent);
             }
         });
 
         alertDialog.show();
 
     }
+
 
 }

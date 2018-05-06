@@ -36,57 +36,46 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UserAreaActivity" />
         </activity>
-        <activity android:name=".Extras.VeggiMenuActivity" />
+        <!-- <activity android:name=".Extras.VeggiMenuActivity" /> -->
         <activity android:name=".OrderActivity" />
-        <activity
-            android:name=".PaymentActivity"
-            android:parentActivityName=".DeliveryRequestActivity" />
-        <activity android:name=".JasonShoppingCart.CatalogActivity" />
-        <activity android:name=".JasonShoppingCart.ProductDetailsActivity" />
-        <activity android:name=".JasonShoppingCart.ShoppingCartActivity" />
-<<<<<<< HEAD
+        <![CDATA[
+        />
+        ]]><!-- <activity android:name=".JasonShoppingCart.CatalogActivity" /> -->
+        <!-- <activity android:name=".JasonShoppingCart.ProductDetailsActivity" /> -->
+        <!-- <activity android:name=".JasonShoppingCart.ShoppingCartActivity" /> -->
+        <!-- <activity android:name=".PaymentActivity" -->
+        <!-- android:parentActivityNamYesNoDeliveryActivityvity"/> -->
+        <!-- <activity android:name=".CatalogActivity" /> -->
+        <!-- <activity android:name=".ProductDetailsActivity" /> -->
+        <!-- <activity android:name=".ShoppingCartActivity" /> -->
 
-        <!--<activity android:name=".PaymentActivity"-->
-            <!--android:parentActivityName=".DeliveryRequestActivity"/>-->
-        <!--<activity android:name=".CatalogActivity" />-->
-        <!--<activity android:name=".ProductDetailsActivity" />-->
-        <!--<activity android:name=".ShoppingCartActivity" />-->
-=======
->>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DeliverActivity" />
+        <activity android:name=".DeliverGuyActivity" />
         <activity
-            android:name=".DeliveryRequestActivity"
-            android:parentActivityName=".JasonShoppingCart.ShoppingCartActivity" />
-<<<<<<< HEAD
-        <activity android:name=".DeliveryRequestActivity"
-            android:parentActivityName=".JasonShoppingCart.ShoppingCartActivity"
-            tools:ignore="DuplicateActivity">
-        </activity>
-
-=======
->>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
+            android:name=".YesNoDeliveryActivity"
+            android:parentActivityName=".ShoppingCart.ShoppingCartWindow" />
         <activity
             android:name=".ReturnActivity"
-            android:parentActivityName=".ReturnActivity" />
+            android:parentActivityName=".Home" />
 
         <service
             android:name=".Services.MyService"
             android:enabled="true"
             android:exported="false" />
-<<<<<<< HEAD
 
         <activity android:name=".ShoppingCart.ShoppingCartWindow" />
-        <activity android:name=".RequestDelivery"
-            android:parentActivityName=".DeliveryRequestActivity"/>
-=======
-        <activity android:name=".ShoppingCart.ShoppingCartWindow" />
-        <activity android:name=".RequestDelivery"></activity>
+        <activity
+            android:name=".RequestDeliveryItem"
+            android:parentActivityName=".YesNoDeliveryActivity" />
+        <!-- <activity android:name=".ShoppingCart.ShoppingCartWindow" /> -->
+        <!-- <activity android:namRequestDeliveryItemvery"></activity> -->
 
->>>>>>> 6fddce7a1012b1afe0db6ac32061e52e31b3f704
+        <activity android:name=".CheckoutActivity">
+            android:parentActivityName=".Home"
+        </activity>
     </application>
 
 </manifest>

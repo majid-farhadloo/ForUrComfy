@@ -8,7 +8,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DeliverActivity extends AppCompatActivity implements
+public class DeliverGuyActivity extends AppCompatActivity implements
         CompoundButton.OnCheckedChangeListener {
     private Switch switchCase;
     private TextView tvSate;
@@ -24,8 +24,8 @@ public class DeliverActivity extends AppCompatActivity implements
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (switchCase.isChecked()) {
-            Intent requestDelivery = new Intent(DeliverActivity.this,RequestDelivery.class);
-            DeliverActivity.this.startActivity(requestDelivery);
+            Intent requestDelivery = new Intent(DeliverGuyActivity.this,RequestDeliveryItem.class);
+            DeliverGuyActivity.this.startActivity(requestDelivery);
             finish();
             tvSate.setText("The Switch Is On");
             Toast.makeText(getApplicationContext(), " The Switch is on",

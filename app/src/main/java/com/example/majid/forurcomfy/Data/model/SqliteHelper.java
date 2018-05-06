@@ -22,7 +22,8 @@ public class SqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE SHOPPING_CART(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " itemId TEXT, quantity INTEGER,  itemName TEXT, category TEXT, description TEXT, price INTEGER);");
+                " itemId TEXT, quantity INTEGER,  itemName TEXT," +
+                " category TEXT, description TEXT, price INTEGER);");
     }
 
     @Override

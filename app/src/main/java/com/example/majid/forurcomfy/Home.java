@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.majid.forurcomfy.Common.Current;
-import com.example.majid.forurcomfy.JasonShoppingCart.CatalogActivity;
+import com.example.majid.forurcomfy.ShoppingCart.ShoppingCartWindow;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -110,7 +110,7 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.deliverer) {
             // Handle the camera action
-            Intent intent = new Intent(Home.this, DeliverActivity.class); // this second home should be deliverer
+            Intent intent = new Intent(Home.this, DeliverGuyActivity.class); // this second home should be deliverer
             startActivity(intent);
         } else if (id == R.id.user) {
 //            Intent intent = new Intent(Home.this, LoginActivity.class); // this second home should be deliverer
@@ -122,11 +122,11 @@ public class Home extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_cart) {
-            Intent intent = new Intent(Home.this, CatalogActivity.class); // this second home should be cartactivity
+            Intent intent = new Intent(Home.this, ShoppingCartWindow.class); // this second home should be cartactivity
             startActivity(intent);
 
         } else if (id == R.id.nav_payment) {
-            Intent intent = new Intent(Home.this, PaymentActivity.class); // this second home should be deliverer
+            Intent intent = new Intent(Home.this, CheckoutActivity.class); // this second home should be deliverer
             startActivity(intent);
 
         } else if (id == R.id.nav_logout) {

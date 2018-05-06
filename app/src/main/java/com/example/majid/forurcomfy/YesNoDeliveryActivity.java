@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class DeliveryRequestActivity extends AppCompatActivity {
+public class YesNoDeliveryActivity extends AppCompatActivity {
 
 
     @Override
@@ -18,15 +18,15 @@ public class DeliveryRequestActivity extends AppCompatActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent no = new Intent(DeliveryRequestActivity.
-                        this,PaymentActivity.class);
+                Intent no = new Intent(YesNoDeliveryActivity.
+                        this,CheckoutActivity.class);
                 startActivity(no);
             }
         });
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(DeliveryRequestActivity.
+                Intent loginIntent = new Intent(YesNoDeliveryActivity.
                         this,LoginActivity.class);
                 startActivity(loginIntent);
             }

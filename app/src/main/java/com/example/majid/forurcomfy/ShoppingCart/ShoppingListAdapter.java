@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.majid.forurcomfy.Data.model.Food;
+import com.example.majid.forurcomfy.Data.model.ShoppingItem;
 import com.example.majid.forurcomfy.R;
 
 import java.util.List;
@@ -35,6 +37,8 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
         }
 
         ShoppingItem currentItem = getItem(position);
+        // adding new current food
+        Food currentFood = getItem(position);
 
 //        ImageView img = (ImageView) listItemView.findViewById(R.id.itemIcon);
 //        Picasso.with(getContext())
@@ -45,13 +49,13 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
 //                .into(img);
 
         TextView name = (TextView) listItemView.findViewById(R.id.itemName);
-        name.setText(currentItem.getFoodName());
+        name.setText(currentFood.getFoodName());
 
 //        TextView description = (TextView) listItemView.findViewById(R.id.itemDescription);
 //        description.setText(currentItem.getDescription());
 
         TextView cost = (TextView) listItemView.findViewById(R.id.itemPrice);
-        cost.setText(currentItem.getPrice());
+        cost.setText((int) currentFood.getPrice());
 
         return listItemView;
     }

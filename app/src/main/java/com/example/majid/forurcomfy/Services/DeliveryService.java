@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.example.majid.forurcomfy.ShoppingCart.ShoppingItem;
+import com.example.majid.forurcomfy.Data.model.ShoppingItem;
 import com.example.majid.forurcomfy.Utlis.HttpHelper;
 import com.google.gson.Gson;
 

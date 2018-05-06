@@ -1,6 +1,6 @@
 package com.example.majid.forurcomfy.model;
 
-import com.example.majid.forurcomfy.ShoppingCart.ShoppingItem;
+import com.example.majid.forurcomfy.Data.model.ShoppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
