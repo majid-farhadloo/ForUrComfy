@@ -7,7 +7,7 @@ var Food = new mongoose.Schema({
 });
 
 var orderSchema = new mongoose.Schema({
-  food : [{type:Food}],
+  food : [Food],
   name : String,
   cell: Number,
   location: String,
